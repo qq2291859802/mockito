@@ -22,6 +22,11 @@ public class MethodInfo implements AbstractAwareMethod {
         this.method = theInvocation.getMethod();
     }
 
+    /**
+     * 校验方法异常类型
+     * @param throwable
+     * @return
+     */
     public boolean isValidException(Throwable throwable) {
         Class<?>[] exceptions = method.getExceptionTypes();
         Class<?> throwableClass = throwable.getClass();
@@ -34,6 +39,11 @@ public class MethodInfo implements AbstractAwareMethod {
         return false;
     }
 
+    /**
+     * 校验返回值类型
+     * @param clazz
+     * @return
+     */
     public boolean isValidReturnType(Class clazz) {
         if (method.getReturnType().isPrimitive() || clazz.isPrimitive()) {
             return Primitives.primitiveTypeOf(clazz) == Primitives.primitiveTypeOf(method.getReturnType());

@@ -8,7 +8,14 @@ import java.io.Serializable;
 
 import org.hamcrest.Matcher;
 
+/**
+ * 匹配装饰器
+ */
 @SuppressWarnings("unchecked")
 public interface MatcherDecorator extends Serializable {
+    /**
+     * 实际的匹配器
+     * @return
+     */
     Matcher getActualMatcher();
 }

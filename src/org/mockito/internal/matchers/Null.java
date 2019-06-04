@@ -10,7 +10,9 @@ import java.io.Serializable;
 import org.hamcrest.Description;
 import org.mockito.ArgumentMatcher;
 
-
+/**
+ * 空匹配
+ */
 public class Null extends ArgumentMatcher<Object> implements Serializable {
 
     private static final long serialVersionUID = 2823082637424390314L;

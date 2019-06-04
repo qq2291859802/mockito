@@ -18,7 +18,9 @@ import java.util.List;
 public class PrintSettings {
 
     public static final int MAX_LINE_LENGTH = 45;
+    // 是不是多行
     private boolean multiline;
+
     private List<Integer> withTypeInfo = new LinkedList<Integer>();
 
     public void setMultiline(boolean multiline) {

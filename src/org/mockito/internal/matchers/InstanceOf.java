@@ -10,7 +10,9 @@ import java.io.Serializable;
 import org.hamcrest.Description;
 import org.mockito.ArgumentMatcher;
 
-
+/**
+ * 实例匹配
+ */
 public class InstanceOf extends ArgumentMatcher<Object> implements Serializable {
 
     private static final long serialVersionUID = 517358915876138366L;

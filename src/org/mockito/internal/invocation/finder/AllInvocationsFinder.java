@@ -20,6 +20,7 @@ public class AllInvocationsFinder {
      * @return invocations
      */
     public List<Invocation> find(List<?> mocks) {
+        // 根据序号升序
         Set<Invocation> invocationsInOrder = new TreeSet<Invocation>(new SequenceNumberComparator());
         for (Object mock : mocks) {
             InternalMockHandler<Object> handler = new MockUtil().getMockHandler(mock);
@@ -30,6 +31,9 @@ public class AllInvocationsFinder {
         return new LinkedList<Invocation>(invocationsInOrder);
     }
 
+    /**
+     * 序号比较器
+     */
     private static final class SequenceNumberComparator implements Comparator<Invocation> {
         public int compare(Invocation o1, Invocation o2) {
             return Integer.valueOf(o1.getSequenceNumber()).compareTo(o2.getSequenceNumber());

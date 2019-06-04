@@ -11,6 +11,9 @@ import java.util.regex.Pattern;
 import org.hamcrest.Description;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * 正则表达式匹配
+ */
 public class Find extends ArgumentMatcher<String> implements Serializable {
 
     private static final long serialVersionUID = 8895781429480404872L;

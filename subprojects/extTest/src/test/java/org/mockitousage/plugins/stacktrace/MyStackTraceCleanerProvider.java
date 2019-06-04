@@ -13,6 +13,7 @@ public class MyStackTraceCleanerProvider implements StackTraceCleanerProvider {
     public StackTraceCleaner getStackTraceCleaner(final StackTraceCleaner defaultCleaner) {
         return new StackTraceCleaner() {
             public boolean isOut(StackTraceElement candidate) {
+                // 处理包含excludeMe的方法
                 if (ENABLED && candidate.getMethodName().contains("excludeMe")) {
                     return true;
                 }

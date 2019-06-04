@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 
 /**
  * Simple annotation processor interface.
+ *
+ * 字段注解处理器
  */
 public interface FieldAnnotationProcessor<A extends Annotation> {
     Object process(A annotation, Field field);

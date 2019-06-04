@@ -31,7 +31,9 @@ public class CreationSettings<T> implements MockCreationSettings<T>, Serializabl
     protected SerializableMode serializableMode = SerializableMode.NONE;
     protected List<InvocationListener> invocationListeners = new ArrayList<InvocationListener>();
     protected boolean stubOnly;
+    // 是否使用构造器
     private boolean useConstructor;
+
     private Object outerClassInstance;
 
     public CreationSettings() {}

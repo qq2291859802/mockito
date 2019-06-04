@@ -10,6 +10,9 @@ import java.io.Serializable;
 import org.hamcrest.Description;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * 任意匹配器(所有都返回true)
+ */
 @SuppressWarnings("unchecked")
 public class Any extends ArgumentMatcher implements Serializable {
 

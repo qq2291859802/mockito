@@ -25,6 +25,11 @@ public class CglibMockMaker implements MockMaker {
                 new MethodInterceptorFilter(mockitoHandler, settings), settings.getTypeToMock(), settings.getExtraInterfaces());
     }
 
+    /**
+     * 校验是不是InternalMockHandler类型
+     * @param handler
+     * @return
+     */
     private InternalMockHandler cast(MockHandler handler) {
         if (!(handler instanceof InternalMockHandler)) {
             throw new MockitoException("At the moment you cannot provide own implementations of MockHandler." +

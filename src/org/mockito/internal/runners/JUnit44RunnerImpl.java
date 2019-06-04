@@ -14,12 +14,16 @@ import org.junit.runner.notification.RunNotifier;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.runners.util.FrameworkUsageValidator;
 
+/**
+ * 支持junit4
+ */
 @SuppressWarnings("deprecation")
 public class JUnit44RunnerImpl implements RunnerImpl {
 
 	JUnit4ClassRunner runner;
 
     public JUnit44RunnerImpl(Class<?> klass) throws InitializationError {
+        // JUnit4ClassRunner
         this.runner = new JUnit4ClassRunner(klass) {
             @Override
             protected Object createTest() throws Exception {

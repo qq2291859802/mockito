@@ -33,14 +33,42 @@ class ClassImposterizer {
     }
     
     private static final NamingPolicy NAMING_POLICY_THAT_ALLOWS_IMPOSTERISATION_OF_CLASSES_IN_SIGNED_PACKAGES = new MockitoNamingPolicy() {
+
+        /**
+         * 类名
+         * @param prefix
+         * @param source
+         * @param key
+         * @param names
+         * @return
+         */
         @Override
         public String getClassName(String prefix, String source, Object key, Predicate names) {
             return "codegen." + super.getClassName(prefix, source, key, names);
         }
     };
-    
+    /**
+     * 忽略桥接方法
+     */
     private static final CallbackFilter IGNORE_BRIDGE_METHODS = new CallbackFilter() {
         public int accept(Method method) {
+    /*
+        public interface SuperClass<T> {
+        void method(T t);
+        }
+
+        public class AClass implements SuperClass<String> {
+        @Override
+        public void method(String s) {
+    　　　　System.out.println(s);
+    　　}
+        }
+
+        ========================================================
+        由于泛型擦除，method方法在子类中其实存在两个，分别是：
+          public void method(java.lang.String);
+          public void method(java.lang.Object);
+     */
             return method.isBridge() ? 1 : 0;
         }
     };
@@ -54,6 +82,7 @@ class ClassImposterizer {
         Object proxyInstance = null;
         try {
             setConstructorsAccessible(mockedType, true);
+            // 代理的class对象
             proxyClass = createProxyClass(mockedType, ancillaryTypes);
             proxyInstance = createProxy(proxyClass, interceptor);
             return mockedType.cast(proxyInstance);
@@ -80,6 +109,11 @@ class ClassImposterizer {
         return instance == null? "null" : describeClass(instance.getClass());
     }
 
+    /**
+     * 设置构造器访问权限
+     * @param mockedType
+     * @param accessible
+     */
     //TODO this method does not belong here
     public void setConstructorsAccessible(Class<?> mockedType, boolean accessible) {
         for (Constructor<?> constructor : mockedType.getDeclaredConstructors()) {
@@ -99,19 +133,24 @@ class ClassImposterizer {
                 // Don't filter
             }
         };
+        // 所有的mock类型(mock类型和接口类型)
         Class<?>[] allMockedTypes = prepend(mockedType, interfaces);
+        // 设置类加载器
 		enhancer.setClassLoader(SearchingClassLoader.combineLoadersOf(allMockedTypes));
         enhancer.setUseFactory(true);
         if (mockedType.isInterface()) {
+            // mock类型是接口
             enhancer.setSuperclass(Object.class);
             enhancer.setInterfaces(allMockedTypes);
         } else {
             enhancer.setSuperclass(mockedType);
             enhancer.setInterfaces(interfaces);
         }
+        //
         enhancer.setCallbackTypes(new Class[]{MethodInterceptor.class, NoOp.class});
         enhancer.setCallbackFilter(IGNORE_BRIDGE_METHODS);
         if (mockedType.getSigners() != null) {
+            // 类标识存在
             enhancer.setNamingPolicy(NAMING_POLICY_THAT_ALLOWS_IMPOSTERISATION_OF_CLASSES_IN_SIGNED_PACKAGES);
         } else {
             enhancer.setNamingPolicy(MockitoNamingPolicy.INSTANCE);
@@ -136,18 +175,32 @@ class ClassImposterizer {
                     + "If you're not sure why you're getting this error, please report to the mailing list.", e);
         }
     }
-    
+
+    /**
+     * 创建代理对象
+     * @param proxyClass
+     * @param interceptor
+     * @return
+     */
     private Object createProxy(Class<Factory> proxyClass, final MethodInterceptor interceptor) {
         Factory proxy;
         try {
+            // 代理对象
             proxy = instantiator.newInstance(proxyClass);
         } catch (InstantationException e) {
             throw new MockitoException("Unable to create mock instance of type '" + proxyClass.getSuperclass().getSimpleName() + "'", e);
         }
+        // 设置回调
         proxy.setCallbacks(new Callback[] {interceptor, SerializableNoOp.SERIALIZABLE_INSTANCE });
         return proxy;
     }
-    
+
+    /**
+     * 合并多个class对象
+     * @param first
+     * @param rest
+     * @return
+     */
     private Class<?>[] prepend(Class<?> first, Class<?>... rest) {
         Class<?>[] all = new Class<?>[rest.length+1];
         all[0] = first;

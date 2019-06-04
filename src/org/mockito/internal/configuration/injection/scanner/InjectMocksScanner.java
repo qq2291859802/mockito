@@ -50,6 +50,7 @@ public class InjectMocksScanner {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             if (null != field.getAnnotation(InjectMocks.class)) {
+                // 含有字段InjectMocks
                 assertNoAnnotations(field, Mock.class, MockitoAnnotations.Mock.class, Captor.class);
                 mockDependentFields.add(field);
             }
@@ -58,6 +59,11 @@ public class InjectMocksScanner {
         return mockDependentFields;
     }
 
+    /**
+     *  如果字段存在注解列表中的某一个注解将抛出异常
+     * @param field  字段
+     * @param annotations 注解列表
+     */
     void assertNoAnnotations(final Field field, final Class... annotations) {
         for (Class annotation : annotations) {
             if (field.isAnnotationPresent(annotation)) {

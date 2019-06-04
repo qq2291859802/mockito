@@ -6,6 +6,9 @@ package org.mockito.internal.util.collections;
 
 import java.util.LinkedList;
 
+/**
+ * 封装list
+ */
 @SuppressWarnings("unchecked")
 public class IdentitySet {
 

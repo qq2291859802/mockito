@@ -5,6 +5,9 @@
 
 package org.mockito.internal.invocation;
 
+/**
+ * 抽象方法标识
+ */
 public interface AbstractAwareMethod {
     boolean isAbstract();
 }

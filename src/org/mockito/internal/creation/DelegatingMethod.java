@@ -9,6 +9,9 @@ import org.mockito.internal.invocation.MockitoMethod;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+/**
+ * 代理了方法对象
+ */
 public class DelegatingMethod implements MockitoMethod {
 
     private final Method method;

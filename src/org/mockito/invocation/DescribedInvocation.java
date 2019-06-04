@@ -12,6 +12,8 @@ import org.mockito.exceptions.PrintableInvocation;
 public interface DescribedInvocation extends PrintableInvocation {
 
     /**
+     *
+     * 调用描述
      * Describes the invocation in the human friendly way.
      *
      * @return the description of this invocation.
@@ -19,6 +21,8 @@ public interface DescribedInvocation extends PrintableInvocation {
     String toString();
 
     /**
+     *
+     *
      * The place in the code where the invocation happened.
      *
      * @return the location of the invocation.

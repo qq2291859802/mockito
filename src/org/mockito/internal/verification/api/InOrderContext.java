@@ -8,8 +8,17 @@ import org.mockito.invocation.Invocation;
 
 public interface InOrderContext {
 
+    /**
+     * 是否已经校验了
+     * @param invocation
+     * @return
+     */
     boolean isVerified(Invocation invocation);
 
+    /**
+     * 标记校验
+     * @param i
+     */
     void markVerified(Invocation i);
 
 }

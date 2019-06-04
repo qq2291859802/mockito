@@ -8,6 +8,11 @@ import org.mockito.invocation.MockHandler;
 import org.mockito.mock.MockCreationSettings;
 
 /**
+ *
+ *
+ * mock制造接口
+ *
+ *
  * The facility to create mocks.
  *
  * <p>By default, an internal cglib/asm/objenesis based implementation is used.</p>

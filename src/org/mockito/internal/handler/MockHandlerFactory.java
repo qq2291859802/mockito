@@ -9,6 +9,8 @@ import org.mockito.mock.MockCreationSettings;
 
 /**
  * by Szczepan Faber, created at: 5/21/12
+ *
+ * mock handler创建工厂
  */
 public class MockHandlerFactory {
 

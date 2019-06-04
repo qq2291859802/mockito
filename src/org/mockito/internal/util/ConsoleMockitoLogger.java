@@ -4,6 +4,9 @@
  */
 package org.mockito.internal.util;
 
+/**
+ * 控制台打印的日志类
+ */
 public class ConsoleMockitoLogger implements MockitoLogger {
 
     /* (non-Javadoc)

@@ -60,6 +60,11 @@ class AcrossJVMSerializationFeature implements Serializable {
     private boolean instanceLocalCurrentlySerializingFlag = false;
     private final Lock mutex = new ReentrantLock();
 
+    /**
+     * 是不是writeReplace方法
+     * @param method
+     * @return
+     */
     public boolean isWriteReplace(Method method) {
         return  method.getReturnType() == Object.class
                 && method.getParameterTypes().length == 0

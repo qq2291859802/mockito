@@ -9,6 +9,9 @@ import java.util.*;
 import static org.mockito.internal.util.Primitives.defaultValueForPrimitiveOrWrapper;
 import static org.mockito.internal.util.Primitives.isPrimitiveOrWrapper;
 
+/**
+ * 常见返回值
+ */
 @SuppressWarnings("unchecked")
 public class HandyReturnValues {
 

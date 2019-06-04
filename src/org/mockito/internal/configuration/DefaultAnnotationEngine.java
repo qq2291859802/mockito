@@ -43,6 +43,12 @@ public class DefaultAnnotationEngine implements AnnotationEngine {
         return forAnnotation(annotation).process(annotation, field);
     }
 
+    /**
+     * 根据注解获取对应的字段注解处理器
+     * @param annotation
+     * @param <A>
+     * @return
+     */
     private <A extends Annotation> FieldAnnotationProcessor<A> forAnnotation(A annotation) {
         if (annotationProcessorMap.containsKey(annotation.annotationType())) {
             return (FieldAnnotationProcessor<A>) annotationProcessorMap.get(annotation.annotationType());

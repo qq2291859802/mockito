@@ -81,6 +81,11 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         assertIncorrectUseOfAdditionalMatchers(additionalMatcherName, subMatchersCount);
     }
 
+    /**
+     * pop指定个数的Matcher
+     * @param count
+     * @return
+     */
     private List<Matcher> popLastArgumentMatchers(int count) {
         List<Matcher> result = new LinkedList<Matcher>();
         result.addAll(matcherStack.subList(matcherStack.size() - count, matcherStack.size()));

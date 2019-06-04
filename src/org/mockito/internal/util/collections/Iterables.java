@@ -10,6 +10,8 @@ import java.util.List;
 public class Iterables {
 
     /**
+     * 将枚举元素添加到集合中
+     *
      * Converts enumeration into iterable
      */
     public static <T> Iterable<T> toIterable(Enumeration<T> in) {

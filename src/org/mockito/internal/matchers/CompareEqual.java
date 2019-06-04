@@ -7,6 +7,10 @@ package org.mockito.internal.matchers;
 
 import java.io.Serializable;
 
+/**
+ * 等于匹配
+ * @param <T>
+ */
 public class CompareEqual<T extends Comparable<T>> extends CompareTo<T> implements Serializable {
 
     private static final long serialVersionUID = 2998586260452920429L;

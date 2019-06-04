@@ -8,6 +8,9 @@ import org.mockito.internal.creation.util.MockitoMethodProxy;
 
 import java.io.Serializable;
 
+/**
+ * 封装MockitoMethodProxy对象
+ */
 public class DefaultRealMethod implements RealMethod, Serializable {
 
     private static final long serialVersionUID = -4596470901191501582L;

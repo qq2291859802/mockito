@@ -3,6 +3,8 @@ package org.mockito.plugins;
 import org.mockito.exceptions.stacktrace.StackTraceCleaner;
 
 /**
+ * 堆栈清理供应器()
+ *
  * An extension point to register custom {@link StackTraceCleaner}.
  * You can replace Mockito's default StackTraceCleaner.
  * You can also 'enhance' Mockito's default behavior
@@ -17,8 +19,8 @@ public interface StackTraceCleanerProvider {
     /**
      * Allows configuring custom StackTraceCleaner.
      *
-     * @param defaultCleaner - Mockito's default StackTraceCleaner
-     * @return StackTraceCleaner to use
+     * @param defaultCleaner - Mockito's default StackTraceCleaner  mockito默认的清理器
+     * @return StackTraceCleaner to use 真正使用的清理器
      */
     StackTraceCleaner getStackTraceCleaner(StackTraceCleaner defaultCleaner);
 }

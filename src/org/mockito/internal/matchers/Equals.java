@@ -11,9 +11,13 @@ import org.mockito.ArgumentMatcher;
 
 import java.io.Serializable;
 
+/**
+ * 等号匹配器
+ */
 public class Equals extends ArgumentMatcher<Object> implements ContainsExtraTypeInformation, Serializable {
 
     private static final long serialVersionUID = -3395637450058086891L;
+    // 期望对象
     private final Object wanted;
 
     public Equals(Object wanted) {

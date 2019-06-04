@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 过滤堆栈元素
+ */
 public class StackTraceFilter implements Serializable {
 
     static final long serialVersionUID = -5499819791513105700L;
@@ -22,6 +25,8 @@ public class StackTraceFilter implements Serializable {
             Plugins.getStackTraceCleanerProvider().getStackTraceCleaner(new DefaultStackTraceCleaner());
     
     /**
+     *
+     *
      * Example how the filter works (+/- means good/bad):
      * [a+, b+, c-, d+, e+, f-, g+] -> [a+, b+, g+]
      * Basically removes all bad from the middle. If any good are in the middle of bad those are also removed. 

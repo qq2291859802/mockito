@@ -18,6 +18,11 @@ public class FrameworkUsageValidator extends RunListener {
         this.notifier = notifier;
     }
 
+    /**
+     * all的test结束事件
+     * @param description
+     * @throws Exception
+     */
     @Override
     public void testFinished(Description description) throws Exception {
         super.testFinished(description);

@@ -20,7 +20,9 @@ import static org.mockito.internal.util.collections.Sets.newMockSafeHashSet;
  */
 public class MockScanner {
     private final MockUtil mockUtil = new MockUtil();
+    // 准备mock的对象
     private final Object instance;
+    // 
     private final Class<?> clazz;
 
     /**

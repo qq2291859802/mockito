@@ -10,7 +10,9 @@ import java.io.Serializable;
 import org.hamcrest.Description;
 import org.mockito.ArgumentMatcher;
 
-
+/**
+ * 起始匹配
+ */
 public class StartsWith extends ArgumentMatcher<String> implements Serializable {
 
     private static final long serialVersionUID = -5978092285707998431L;

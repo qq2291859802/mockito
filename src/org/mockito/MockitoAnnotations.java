@@ -99,6 +99,7 @@ public class MockitoAnnotations {
             //this means user has his own annotation engine and we have to respect that.
             //we will do annotation processing the old way so that we are backwards compatible
             while (clazz != Object.class) {
+                // 遍历本类和所有父类
                 scanDeprecatedWay(annotationEngine, testClass, clazz);
                 clazz = clazz.getSuperclass();
             }

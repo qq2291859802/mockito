@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
+/**
+ * 可以序列化的方法
+ */
 public class SerializableMethod implements Serializable, MockitoMethod {
 
     private static final long serialVersionUID = 6005610965006048445L;

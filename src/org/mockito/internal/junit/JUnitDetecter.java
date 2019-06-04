@@ -1,5 +1,9 @@
 package org.mockito.internal.junit;
 
+
+/**
+ * 检查是否存在junit
+ */
 class JUnitDetecter {
 
     private boolean hasJUnit;

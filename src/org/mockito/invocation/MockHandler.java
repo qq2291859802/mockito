@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 /**
  * Mockito handler of an invocation on a mock. This is a core part of the API, the heart of Mockito.
+ * 处理调用器对象
+ *
  * See also the {@link org.mockito.plugins.MockMaker}.
  * <p>
  * This api is work in progress. Do not provide your own implementations.

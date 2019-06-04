@@ -12,6 +12,8 @@ public interface OngoingInjecter {
     /**
      * Inject the mock.
      *
+     * 注入的mock对象
+     *
      * <p>
      * Please check the actual implementation.
      * </p>

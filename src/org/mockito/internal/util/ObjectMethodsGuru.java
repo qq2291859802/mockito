@@ -10,6 +10,9 @@ import org.mockito.internal.invocation.MockitoMethod;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
+/**
+ * 判断是否是Object继承的toString ,equals,hashCode和CompareTo方法
+ */
 public class ObjectMethodsGuru implements Serializable {
 
     private static final long serialVersionUID = -1286718569065470494L;

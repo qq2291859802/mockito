@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 
 /**
+ *
+ * mock的调用对象
+ *
+ *
  * An invocation on a mock
  * <p>
  * A placeholder for mock, the method that was called and the arguments that were passed.
@@ -37,6 +41,8 @@ public interface InvocationOnMock extends Serializable {
     Object[] getArguments();
     
     /**
+     * 指定类型（存在类型转换）和下标的参数对象
+     *
     * Returns casted argument using position
     * @param index argument position
     * @param clazz argument type
@@ -46,6 +52,8 @@ public interface InvocationOnMock extends Serializable {
 
 
     /**
+     *
+     * 执行方法
      * calls real method
      * <p>
      * <b>Warning:</b> depending on the real implementation it might throw exceptions  

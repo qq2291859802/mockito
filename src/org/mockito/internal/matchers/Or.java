@@ -13,6 +13,9 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * 或匹配
+ */
 @SuppressWarnings("unchecked")
 public class Or extends ArgumentMatcher implements Serializable {
 

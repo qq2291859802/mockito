@@ -11,6 +11,9 @@ import org.mockito.verification.VerificationMode;
 
 import java.io.Serializable;
 
+/**
+ * 线程安全的MockingProgress
+ */
 @SuppressWarnings("unchecked")
 public class ThreadSafeMockingProgress implements MockingProgress, Serializable {
     

@@ -7,6 +7,9 @@ package org.mockito.internal.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 基本数据类型和其包装类型的工具类
+ */
 @SuppressWarnings("unchecked")
 public class Primitives {
 
@@ -66,6 +69,7 @@ public class Primitives {
     }
 
     static {
+        // 基本数据类型和默认值
         PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Boolean.class, false);
         PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Character.class, '\u0000');
         PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Byte.class, (byte) 0);

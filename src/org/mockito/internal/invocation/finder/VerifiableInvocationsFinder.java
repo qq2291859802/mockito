@@ -22,6 +22,7 @@ public class VerifiableInvocationsFinder {
     }
 
     private static class RemoveIgnoredForVerification implements Filter<Invocation>{
+        // 移除忽略校验的调用器
         public boolean isOut(Invocation invocation) {
             return invocation.isIgnoredForVerification();
         }

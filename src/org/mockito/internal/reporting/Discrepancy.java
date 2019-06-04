@@ -4,9 +4,13 @@
  */
 package org.mockito.internal.reporting;
 
+/**
+ * 差异对象
+ */
 public class Discrepancy {
-
+    // 期望长度
     private final int wantedCount;
+    // 实际长度
     private final int actualCount;
 
     public Discrepancy(int wantedCount, int actualCount) {

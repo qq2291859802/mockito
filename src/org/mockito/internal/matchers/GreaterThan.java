@@ -7,6 +7,10 @@ package org.mockito.internal.matchers;
 
 import java.io.Serializable;
 
+/**
+ * gt matcher
+ * @param <T>
+ */
 public class GreaterThan<T extends Comparable<T>> extends CompareTo<T> implements Serializable {
 
     private static final long serialVersionUID = 7446529803235604408L;

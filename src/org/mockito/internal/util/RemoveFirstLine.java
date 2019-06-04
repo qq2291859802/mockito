@@ -4,6 +4,9 @@
  */
 package org.mockito.internal.util;
 
+/**
+ * 移除第一行的工具类
+ */
 public class RemoveFirstLine {
 
     /**

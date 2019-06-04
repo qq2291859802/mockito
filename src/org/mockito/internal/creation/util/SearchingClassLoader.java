@@ -19,11 +19,22 @@ public class SearchingClassLoader extends ClassLoader {
         super(parent);
         this.nextToSearch = nextToSearch;
     }
-    
+
+    /**
+     * 合并多个类加载器
+     * @param classes
+     * @return
+     */
     public static ClassLoader combineLoadersOf(Class<?>... classes) {
         return combineLoadersOf(classes[0], classes);
     }
-    
+
+    /**
+     * 合并类加载器(去重)
+     * @param first 第一个类加载器
+     * @param others 其他的类加载器
+     * @return
+     */
     private static ClassLoader combineLoadersOf(Class<?> first, Class<?>... others) {
         List<ClassLoader> loaders = new ArrayList<ClassLoader>();
         
@@ -48,17 +59,27 @@ public class SearchingClassLoader extends ClassLoader {
         
         return combine(loaders);
     }
-    
+
+    /**
+     * 合并所有的类加载器，创建SearchingClassLoader对象
+     * @param parentLoaders
+     * @return
+     */
     private static ClassLoader combine(List<ClassLoader> parentLoaders) {
         ClassLoader loader = parentLoaders.get(parentLoaders.size()-1);
-        
+        // 递归添加类加载器(nextToSearch参数合并多个类加载器，方便递归查找)
         for (int i = parentLoaders.size()-2; i >= 0; i--) {
             loader = new SearchingClassLoader(parentLoaders.get(i), loader);
         }
         
         return loader;
     }
-    
+
+    /**
+     * 不存在才添加
+     * @param loaders
+     * @param c
+     */
     private static void addIfNewElement(List<ClassLoader> loaders, ClassLoader c) {
         if (c != null && !loaders.contains(c)) {
             loaders.add(c);
@@ -68,6 +89,7 @@ public class SearchingClassLoader extends ClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         if (nextToSearch != null) {
+            // 递归查找类
             return nextToSearch.loadClass(name);
         } else {
             return super.findClass(name); // will throw ClassNotFoundException

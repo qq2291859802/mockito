@@ -15,11 +15,16 @@ import org.junit.runners.model.Statement;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.runners.util.FrameworkUsageValidator;
 
+/**
+ * 支持junit4以上
+ */
 public class JUnit45AndHigherRunnerImpl implements RunnerImpl {
 
     private final BlockJUnit4ClassRunner runner;
 
     public JUnit45AndHigherRunnerImpl(Class<?> klass) throws InitializationError {
+
+        // BlockJUnit4ClassRunner
         runner = new BlockJUnit4ClassRunner(klass) {
             protected Statement withBefores(FrameworkMethod method, Object target,
                     Statement statement) {

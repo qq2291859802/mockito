@@ -8,6 +8,9 @@ package org.mockito.internal.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 驼峰式命名解析，参考：org.mockito.internal.util.DecamelizerTest
+ */
 public class Decamelizer {
 
 private static final Pattern CAPS = Pattern.compile("([A-Z\\d][^A-Z\\d]*)");

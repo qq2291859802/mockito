@@ -32,6 +32,10 @@ public class CapturingMatcher<T> extends ArgumentMatcher<T> implements CapturesA
         description.appendText("<Capturing argument>");
     }
 
+    /**
+     * 返回最后一个参数
+     * @return
+     */
     public T getLastValue() {
         if (arguments.isEmpty()) {
             new Reporter().noArgumentValueWasCaptured();

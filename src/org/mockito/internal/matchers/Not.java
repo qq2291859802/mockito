@@ -11,6 +11,9 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * 不等匹配
+ */
 @SuppressWarnings("unchecked")
 public class Not extends ArgumentMatcher implements Serializable {
 

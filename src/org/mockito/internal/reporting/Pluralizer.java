@@ -4,6 +4,9 @@
  */
 package org.mockito.internal.reporting;
 
+/**
+ * 复数格式化
+ */
 public class Pluralizer {
 
     public static String pluralize(int number) {

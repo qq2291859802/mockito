@@ -6,9 +6,19 @@ package org.mockito.internal.matchers;
 
 import java.lang.reflect.Array;
 
-//stolen from hamcrest because I didn't want to have more dependency than Matcher class 
+//stolen from hamcrest because I didn't want to have more dependency than Matcher class
+
+/**
+ * 匹配是不是相等
+ */
 public class Equality {
 
+    /**
+     * 判断对象是不是相等
+     * @param o1
+     * @param o2
+     * @return
+     */
     public static boolean areEqual(Object o1, Object o2) {
         if (o1 == o2 ) {
             return true;
@@ -21,6 +31,12 @@ public class Equality {
         }
     }
 
+    /**
+     * 数组是不是相等
+     * @param o1
+     * @param o2
+     * @return
+     */
     static boolean areArraysEqual(Object o1, Object o2) {
         return areArrayLengthsEqual(o1, o2)
                 && areArrayElementsEqual(o1, o2);

@@ -6,6 +6,9 @@ package org.mockito.internal.creation.cglib;
 
 import org.mockito.cglib.core.DefaultNamingPolicy;
 
+/**
+ * mockito 名字
+ */
 class MockitoNamingPolicy extends DefaultNamingPolicy {
     
     public static final MockitoNamingPolicy INSTANCE = new MockitoNamingPolicy(); 

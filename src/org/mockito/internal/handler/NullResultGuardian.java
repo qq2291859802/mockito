@@ -16,11 +16,14 @@ import java.util.List;
 /**
  * Protects the results from delegate MockHandler. Makes sure the results are valid.
  *
+ *
  * by Szczepan Faber, created at: 5/22/12
  */
 class NullResultGuardian implements InternalMockHandler {
     private final InternalMockHandler delegate;
 
+
+    // 静态代理
     public NullResultGuardian(InternalMockHandler delegate) {
         this.delegate = delegate;
     }
@@ -29,6 +32,7 @@ class NullResultGuardian implements InternalMockHandler {
         Object result = delegate.handle(invocation);
         Class<?> returnType = invocation.getMethod().getReturnType();
         if(result == null && returnType.isPrimitive()) {
+            // null 或者 基本数据类型
             //primitive values cannot be null
             return new HandyReturnValues().returnFor(returnType);
         } else {

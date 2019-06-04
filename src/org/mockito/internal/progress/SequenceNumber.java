@@ -4,6 +4,9 @@
  */
 package org.mockito.internal.progress;
 
+/**
+ * 序列号对象
+ */
 public class SequenceNumber {
     
     private static int sequenceNumber = 1;

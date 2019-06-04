@@ -4,6 +4,9 @@
  */
 package org.mockito.internal.util;
 
+/**
+ * 拼接日志对象
+ */
 public class SimpleMockitoLogger extends ConsoleMockitoLogger {
 
     StringBuilder loggedInfo = new StringBuilder();

@@ -26,6 +26,13 @@ public class RunnerProvider {
         return hasJUnit45OrHigher;
     }
 
+    /**
+     * 创建Junit runner
+     * @param runnerClassName
+     * @param constructorParam
+     * @return
+     * @throws Exception
+     */
     public RunnerImpl newInstance(String runnerClassName, Class<?> constructorParam) throws Exception {
         Constructor<?> constructor;
         try {

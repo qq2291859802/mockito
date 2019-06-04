@@ -10,6 +10,9 @@ import java.util.Arrays;
 
 import org.hamcrest.Description;
 
+/**
+ * 数组相等匹配器
+ */
 public class ArrayEquals extends Equals {
 
     private static final long serialVersionUID = -7167812844261087583L;

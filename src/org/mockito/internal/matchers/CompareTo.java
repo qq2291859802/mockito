@@ -20,6 +20,7 @@ public abstract class CompareTo<T extends Comparable<T>> extends ArgumentMatcher
     public boolean matches(Object actual) {
         
         if(!(actual instanceof Comparable)) {
+            // 如果不为Comparable，直接返回false
             return false;
         }
         

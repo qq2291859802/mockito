@@ -2,8 +2,12 @@ package org.mockito.internal.creation.instance;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * 构造器实例化对象
+ */
 public class ConstructorInstantiator implements Instantiator {
 
+    // 构造器参数(如果参数为null,表示空参)
     private final Object outerClassInstance;
 
     public ConstructorInstantiator(Object outerClassInstance) {
@@ -17,6 +21,13 @@ public class ConstructorInstantiator implements Instantiator {
         return withParams(cls, outerClassInstance);
     }
 
+    /**
+     * 使用带参构造器创建对象
+     * @param cls
+     * @param params
+     * @param <T>
+     * @return
+     */
     private static <T> T withParams(Class<T> cls, Object... params) {
         try {
             //this is kind of overengineered because we don't need to support more params
@@ -38,6 +49,12 @@ public class ConstructorInstantiator implements Instantiator {
                 + cls.getSimpleName() + "'.\nPlease ensure that the outer instance has correct type and that the target class has 0-arg constructor.", e);
     }
 
+    /**
+     * 参数匹配，如果全部匹配则返回true
+     * @param types
+     * @param params
+     * @return
+     */
     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
         if (params.length != types.length) {
             return false;
@@ -50,6 +67,12 @@ public class ConstructorInstantiator implements Instantiator {
         return true;
     }
 
+    /**
+     * 使用空参构造器
+     * @param cls
+     * @param <T>
+     * @return
+     */
     private static <T> T noArgConstructor(Class<T> cls) {
         try {
             return cls.newInstance();

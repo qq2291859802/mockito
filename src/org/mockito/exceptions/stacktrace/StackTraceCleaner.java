@@ -17,6 +17,8 @@ package org.mockito.exceptions.stacktrace;
 public interface StackTraceCleaner {
 
     /**
+     * 排除
+     *
      * Decides if element is excluded.
      *
      * @param candidate element of the actual stack trace

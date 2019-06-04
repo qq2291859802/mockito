@@ -21,6 +21,9 @@ import java.util.List;
  * Handler, that call all listeners wanted for this mock, before delegating it
  * to the parameterized handler.
  *
+ *
+ * 带有通知能力的处理器
+ *
  * Also imposterize MockHandlerImpl, delegate all call of InternalMockHandler to the real mockHandler
  */
 class InvocationNotifierHandler<T> implements MockHandler, InternalMockHandler<T> {
@@ -33,9 +36,17 @@ class InvocationNotifierHandler<T> implements MockHandler, InternalMockHandler<T
         this.invocationListeners = settings.getInvocationListeners();
     }
 
+    /**
+     * 处理一个调用器
+     * @param invocation The invocation to handle
+     * @return
+     * @throws Throwable
+     */
     public Object handle(Invocation invocation) throws Throwable {
         try {
+            // 返回值
             Object returnedValue = mockHandler.handle(invocation);
+
             notifyMethodCall(invocation, returnedValue);
             return returnedValue;
         } catch (Throwable t){
@@ -44,8 +55,13 @@ class InvocationNotifierHandler<T> implements MockHandler, InternalMockHandler<T
         }
     }
 
-
+    /**
+     * 通知方法回调
+     * @param invocation
+     * @param returnValue
+     */
 	private void notifyMethodCall(Invocation invocation, Object returnValue) {
+	    // 通知所有的监听器
 		for (InvocationListener listener : invocationListeners) {
             try {
                 listener.reportInvocation(new NotifiedMethodInvocationReport(invocation, returnValue));
@@ -55,6 +71,11 @@ class InvocationNotifierHandler<T> implements MockHandler, InternalMockHandler<T
         }
 	}
 
+    /**
+     * 通知方法回调异常
+     * @param invocation
+     * @param exception
+     */
     private void notifyMethodCallException(Invocation invocation, Throwable exception) {
 		for (InvocationListener listener : invocationListeners) {
             try {

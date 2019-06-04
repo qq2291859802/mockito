@@ -9,7 +9,7 @@ import org.mockito.mock.MockName;
 import java.io.Serializable;
 
 public class MockNameImpl implements MockName, Serializable {
-    
+
     private static final long serialVersionUID = 8014974700844306925L;
     private final String mockName;
     private boolean defaultName;
@@ -17,6 +17,7 @@ public class MockNameImpl implements MockName, Serializable {
     @SuppressWarnings("unchecked")
     public MockNameImpl(String mockName, Class classToMock) {
         if (mockName == null) {
+            // 类名当做mock名称
             this.mockName = toInstanceName(classToMock);
             this.defaultName = true;
         } else {
@@ -28,20 +29,26 @@ public class MockNameImpl implements MockName, Serializable {
         this.mockName = mockName;
     }
 
+    /**
+     * 获取类名
+     * @param clazz
+     * @return
+     */
     private static String toInstanceName(Class<?> clazz) {
         String className = clazz.getSimpleName();
         if (className.length() == 0) {
+            // 匿名类
             //it's an anonymous class, let's get name from the parent
             className = clazz.getSuperclass().getSimpleName();
         }
         //lower case first letter
         return className.substring(0, 1).toLowerCase() + className.substring(1);
     }
-    
+
     public boolean isDefault() {
         return defaultName;
     }
-    
+
     @Override
     public String toString() {
         return mockName;

@@ -13,22 +13,28 @@ package org.mockito.invocation;
  * that extend Mockito.
  *
  * @since 1.9.5
+ *
+ *
+ * 调用mock对象的基类
  */
 public interface Invocation extends InvocationOnMock, DescribedInvocation {
 
     /**
+     * 是否已经校验了
      * @return whether the invocation has been already verified.
      * Needed for {@link org.mockito.Mockito#verifyNoMoreInteractions(Object...)}
      */
     boolean isVerified();
 
     /**
+     * 序列号
      * @return the sequence number of the Invocation. Useful to determine the order of invocations.
      * Used by verification in order.
      */
     int getSequenceNumber();
 
     /**
+     * 本地环境
      * @return the location in code of this invocation.
      */
     Location getLocation();

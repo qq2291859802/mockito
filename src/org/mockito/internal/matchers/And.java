@@ -13,16 +13,25 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * and matcher
+ */
 @SuppressWarnings("unchecked")
 public class And extends ArgumentMatcher implements Serializable {
 
     private static final long serialVersionUID = -4624719625691177501L;
+    // 多个匹配器对象
     private final List<Matcher> matchers;
 
     public And(List<Matcher> matchers) {
         this.matchers = matchers;
     }
 
+    /**
+     * 所有匹配成功则返回true
+     * @param actual
+     * @return
+     */
     public boolean matches(Object actual) {
         for (Matcher matcher : matchers) {
             if (!matcher.matches(actual)) {

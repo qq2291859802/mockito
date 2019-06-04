@@ -10,6 +10,9 @@ import org.mockito.internal.runners.util.TestMethodsFinder;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * 获取junit runner工厂
+ */
 public class RunnerFactory {
 
     private final RunnerProvider runnerProvider;
