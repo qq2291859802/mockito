@@ -4,17 +4,22 @@ import org.mockito.Incubating;
 
 /**
  * Mock serializable style.
+ *
+ * 序列化模式
  */
 @Incubating
 public enum SerializableMode {
 
     /**
      * No serialization.
+     * 不序列化
      */
     NONE,
 
     /**
      * Basic serializable mode for mock objects. Introduced in Mockito 1.8.1.
+     *
+     *
      */
     BASIC,
 

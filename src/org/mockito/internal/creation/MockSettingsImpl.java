@@ -27,9 +27,14 @@ import static org.mockito.internal.util.collections.Sets.newSet;
 public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSettings, MockCreationSettings<T> {
 
     private static final long serialVersionUID = 4475297236197939569L;
+    // 是否使用构造器创建实例(mock)
     private boolean useConstructor;
     private Object outerClassInstance;
 
+    /**
+     *
+     * @return
+     */
     public MockSettings serializable() {
         return serializable(SerializableMode.BASIC);
     }
@@ -40,6 +45,7 @@ public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSett
     }
 
     public MockSettings extraInterfaces(Class... extraInterfaces) {
+        // 校验接口列表
         if (extraInterfaces == null || extraInterfaces.length == 0) {
             new Reporter().extraInterfacesRequiresAtLeastOneInterface();
         }

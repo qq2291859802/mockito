@@ -19,6 +19,8 @@ public interface MockCreationSettings<T> {
 
     /**
      * Mocked type. An interface or class the mock should implement / extend.
+     *
+     *
      */
     Class<T> getTypeToMock();
 

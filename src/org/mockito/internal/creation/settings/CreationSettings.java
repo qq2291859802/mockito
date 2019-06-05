@@ -21,12 +21,17 @@ import java.util.Set;
  */
 public class CreationSettings<T> implements MockCreationSettings<T>, Serializable {
     private static final long serialVersionUID = -6789800638070123629L;
-
+    // mock对象需要实现的接口/类
     protected Class<T> typeToMock;
+    // mock对象需要额外实现的接口列表
     protected Set<Class> extraInterfaces = new LinkedHashSet<Class>();
+    // mock名字
     protected String name;
+    //
     protected Object spiedInstance;
+    // 默认结果
     protected Answer<Object> defaultAnswer;
+    //
     protected MockName mockName;
     protected SerializableMode serializableMode = SerializableMode.NONE;
     protected List<InvocationListener> invocationListeners = new ArrayList<InvocationListener>();
@@ -38,6 +43,10 @@ public class CreationSettings<T> implements MockCreationSettings<T>, Serializabl
 
     public CreationSettings() {}
 
+    /**
+     * copy settings
+     * @param copy
+     */
     @SuppressWarnings("unchecked")
     public CreationSettings(CreationSettings copy) {
         this.typeToMock = copy.typeToMock;

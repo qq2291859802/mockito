@@ -35,10 +35,15 @@ import java.io.Serializable;
  * {@link MockSettings} has been introduced for two reasons.
  * Firstly, to make it easy to add another mock setting when the demand comes.
  * Secondly, to enable combining together different mock settings without introducing zillions of overloaded mock() methods.
+ *
+ *
+ * mock配置接口
  */
 public interface MockSettings extends Serializable {
 
     /**
+     * 指定mock对象还需要实现的接口列表
+     *
      * Specifies extra interfaces the mock should implement. Might be useful for legacy code or some corner cases.
      * For background, see issue 51 <a href="http://code.google.com/p/mockito/issues/detail?id=51">here</a>
      * <p>
@@ -62,6 +67,9 @@ public interface MockSettings extends Serializable {
 
     /**
      * Specifies mock name. Naming mocks can be helpful for debugging - the name is used in all verification errors.
+     *
+     * mock 名字
+     *
      * <p>
      * Beware that naming mocks is not a solution for complex code which uses too many mocks or collaborators.
      * <b>If you have too many mocks then refactor the code</b> so that it's easy to test/debug without necessity of naming mocks.
@@ -156,6 +164,8 @@ public interface MockSettings extends Serializable {
      *   List serializableMock = mock(List.class, withSettings().serializable());
      * </code></pre>
      *
+     * 设置序列化
+     *
      * @return settings instance so that you can fluently specify other settings
      * @since 1.8.1
      */
@@ -173,6 +183,9 @@ public interface MockSettings extends Serializable {
      * <pre class="code"><code class="java">
      *   List serializableMock = mock(List.class, withSettings().serializable(SerializableMode.ACROSS_CLASSLOADERS));
      * </code></pre>
+     *
+     *
+     * 设置指定的序列化模式
      *
      * @param mode serialization mode
      * @return settings instance so that you can fluently specify other settings
