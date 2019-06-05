@@ -16,6 +16,8 @@ import java.util.List;
 /**
  * Protects the results from delegate MockHandler. Makes sure the results are valid.
  *
+ * 处理空值和基本数据类型的结果
+ *
  *
  * by Szczepan Faber, created at: 5/22/12
  */

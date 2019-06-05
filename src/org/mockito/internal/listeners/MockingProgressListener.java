@@ -4,5 +4,8 @@
  */
 package org.mockito.internal.listeners;
 
+/**
+ * mock执行的监听器
+ */
 public interface MockingProgressListener {
 }

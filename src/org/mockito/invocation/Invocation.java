@@ -15,7 +15,7 @@ package org.mockito.invocation;
  * @since 1.9.5
  *
  *
- * 调用mock对象的基类
+ * 调用mock对象的基类(针对的是一个方法对象)
  */
 public interface Invocation extends InvocationOnMock, DescribedInvocation {
 

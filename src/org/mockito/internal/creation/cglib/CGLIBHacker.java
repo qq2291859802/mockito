@@ -13,6 +13,8 @@ class CGLIBHacker {
 
     public void setMockitoNamingPolicy(MethodProxy methodProxy) {
         try {
+            // ---------methodProxy.createInfo.namingPolicy属性控制命名协议，需要使用反射的方式修改-----------
+            // createInfo字段对象
             Field createInfoField = reflectOnCreateInfo(methodProxy);
             createInfoField.setAccessible(true);
             Object createInfo = createInfoField.get(methodProxy);
@@ -27,6 +29,13 @@ class CGLIBHacker {
         }
     }
 
+    /**
+     * 反射获取createInfo字段对象
+     * @param methodProxy
+     * @return
+     * @throws SecurityException
+     * @throws NoSuchFieldException
+     */
     @SuppressWarnings("unchecked")
     private Field reflectOnCreateInfo(MethodProxy methodProxy) throws SecurityException, NoSuchFieldException {
 

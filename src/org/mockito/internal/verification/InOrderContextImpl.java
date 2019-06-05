@@ -8,6 +8,9 @@ import org.mockito.internal.util.collections.IdentitySet;
 import org.mockito.internal.verification.api.InOrderContext;
 import org.mockito.invocation.Invocation;
 
+/**
+ * 依靠IdentitySet保证添加Invocation对象的唯一性
+ */
 public class InOrderContextImpl implements InOrderContext {
     
     final IdentitySet verified = new IdentitySet();

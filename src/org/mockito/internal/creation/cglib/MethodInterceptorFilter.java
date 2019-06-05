@@ -25,12 +25,15 @@ import java.lang.reflect.Method;
 
 /**
  * Should be one instance per mock instance, see CglibMockMaker.
+ *
+ * 当执行mock对象的方法时，会执行org.mockito.internal.creation.cglib.MethodInterceptorFilter#intercept
  */
 class MethodInterceptorFilter implements MethodInterceptor, Serializable {
 
     private static final long serialVersionUID = 6182795666612683784L;
     private final InternalMockHandler handler;
     final ObjectMethodsGuru objectMethodsGuru = new ObjectMethodsGuru();
+    // 配置对象
     private final MockCreationSettings mockSettings;
     private final AcrossJVMSerializationFeature acrossJVMSerializationFeature = new AcrossJVMSerializationFeature();
 
@@ -39,6 +42,15 @@ class MethodInterceptorFilter implements MethodInterceptor, Serializable {
         this.mockSettings = mockSettings;
     }
 
+    /**
+     * 在mock对象执行方法时调用，用于动态替换方法执行逻辑
+     * @param proxy 代理对象
+     * @param method 被执行的方法对象，如果直接调用method.invoke(args)表示原有方法逻辑不改变
+     * @param args 被执行方法的参数
+     * @param methodProxy 方法的代理对象
+     * @return
+     * @throws Throwable
+     */
     public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy)
             throws Throwable {
         if (objectMethodsGuru.isEqualsMethod(method)) {
@@ -48,13 +60,15 @@ class MethodInterceptorFilter implements MethodInterceptor, Serializable {
         } else if (acrossJVMSerializationFeature.isWriteReplace(method)) {
             return acrossJVMSerializationFeature.writeReplace(proxy);
         }
-        
+
         MockitoMethodProxy mockitoMethodProxy = createMockitoMethodProxy(methodProxy);
+        // 修改命名协议
         new CGLIBHacker().setMockitoNamingPolicy(methodProxy);
         
         MockitoMethod mockitoMethod = createMockitoMethod(method);
-        
+        // 增加部分日志过滤功能
         CleanTraceRealMethod realMethod = new CleanTraceRealMethod(mockitoMethodProxy);
+        // 创建一个调用器对象
         Invocation invocation = new InvocationImpl(proxy, mockitoMethod, args, SequenceNumber.next(), realMethod);
         return handler.handle(invocation);
     }
@@ -67,12 +81,22 @@ class MethodInterceptorFilter implements MethodInterceptor, Serializable {
         return System.identityHashCode(mock);
     }
 
+    /**
+     * 封装methodProxy对象
+     * @param methodProxy
+     * @return
+     */
     public MockitoMethodProxy createMockitoMethodProxy(MethodProxy methodProxy) {
         if (mockSettings.isSerializable())
             return new SerializableMockitoMethodProxy(methodProxy);
         return new DelegatingMockitoMethodProxy(methodProxy);
     }
-    
+
+    /**
+     * 封装method对象
+     * @param method
+     * @return
+     */
     public MockitoMethod createMockitoMethod(Method method) {
         if (mockSettings.isSerializable()) {
             return new SerializableMethod(method);

@@ -120,7 +120,13 @@ class ClassImposterizer {
             constructor.setAccessible(accessible);
         }
     }
-    
+
+    /**
+     * 创建代理class对象
+     * @param mockedType mock接口/对象类型
+     * @param interfaces mock的接口
+     * @return
+     */
     public Class<Factory> createProxyClass(Class<?> mockedType, Class<?>... interfaces) {
         if (mockedType == Object.class) {
             mockedType = ClassWithSuperclassToWorkAroundCglibBug.class;

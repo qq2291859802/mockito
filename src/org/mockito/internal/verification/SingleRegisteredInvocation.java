@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 只有单个Invocation对象
+ */
 public class SingleRegisteredInvocation implements RegisteredInvocations, Serializable {
 
     private Invocation invocation;

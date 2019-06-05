@@ -21,6 +21,7 @@ public class StackTraceFilter implements Serializable {
 
     static final long serialVersionUID = -5499819791513105700L;
 
+    // 使用插件的行为修改需要请求的堆栈信息
     private static final StackTraceCleaner CLEANER =
             Plugins.getStackTraceCleanerProvider().getStackTraceCleaner(new DefaultStackTraceCleaner());
     

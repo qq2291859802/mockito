@@ -16,6 +16,10 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
+ *
+ * 调用一个mock对象的调用器对象
+ *
+ *
  * Method call on a mock object.
  * <p>
  * Contains sequence number which should be globally unique and is used for
@@ -27,16 +31,21 @@ import java.util.Arrays;
 public class InvocationImpl implements Invocation, VerificationAwareInvocation {
 
     private static final long serialVersionUID = 8240069639250980199L;
+    // 序号
     private final int sequenceNumber;
+    // mock对象
     private final Object mock;
+    // mockito代理的方法对象
     private final MockitoMethod method;
+    // 方法实参列表(可变参数经过扩展)
     private final Object[] arguments;
+    // 原始方法实参列表
     private final Object[] rawArguments;
 
     private final Location location;
     private boolean verified;
     private boolean isIgnoredForVerification;
-
+    // 真正的执行方法（经过多层静态代理）
     final RealMethod realMethod;
     private StubInfo stubInfo;
 

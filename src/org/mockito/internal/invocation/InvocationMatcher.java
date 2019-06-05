@@ -25,7 +25,10 @@ import java.util.List;
 public class InvocationMatcher implements DescribedInvocation, CapturesArgumensFromInvocation, Serializable {
 
     private static final long serialVersionUID = -3047126096857467610L;
+    // invocation对象
     private final Invocation invocation;
+
+    // 一个方法拥有多个参数，对应多个匹配器
     private final List<Matcher> matchers;
 
     public InvocationMatcher(Invocation invocation, List<Matcher> matchers) {
@@ -57,9 +60,15 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
         return new PrintSettings().print(matchers, invocation);
     }
 
+    /**
+     * 判断两个Invocation对象是否匹配
+     * @param actual
+     * @return
+     */
     public boolean matches(Invocation actual) {
         return invocation.getMock().equals(actual.getMock())
                 && hasSameMethod(actual)
+                // 参数和匹配器是否一致
                 && new ArgumentsComparator().argumentsMatch(this, actual);
     }
 
@@ -72,6 +81,7 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
     }
 
     /**
+     * 判断是不是相似的方法
      * similar means the same method name, same mock, unverified 
      * and: if arguments are the same cannot be overloaded
      */
@@ -84,15 +94,21 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
         final boolean mockIsTheSame = getInvocation().getMock() == candidate.getMock();
         final boolean methodEquals = hasSameMethod(candidate);
 
+        // 需要满足 unverified，mockIsTheSame，methodNameEquals （没有校验methodEquals）
         if (!methodNameEquals || !isUnverified || !mockIsTheSame) {
             return false;
         }
-
+        // ???
         final boolean overloadedButSameArgs = !methodEquals && safelyArgumentsMatch(candidate.getArguments());
 
         return !overloadedButSameArgs;
     }
 
+    /**
+     * 比较两个Invocation对象的方法对象是不是一致
+     * @param candidate
+     * @return
+     */
     public boolean hasSameMethod(Invocation candidate) {
         //not using method.equals() for 1 good reason:
         //sometimes java generates forwarding methods when generics are in play see JavaGenericsForwardingMethodsTest
@@ -137,6 +153,11 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
         }
     }
 
+    /**
+     * 可变参数匹配器判断
+     * @param matcher
+     * @return
+     */
     private boolean isVarargMatcher(Matcher matcher) {
         Matcher actualMatcher = matcher;
         if (actualMatcher instanceof MatcherDecorator) {
@@ -145,6 +166,12 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
         return actualMatcher instanceof VarargMatcher;
     }
 
+    /**
+     * 可变参数判断
+     * @param invocation
+     * @param position
+     * @return
+     */
     private boolean isVariableArgument(Invocation invocation, int position) {
         return invocation.getRawArguments().length - 1 == position
                 && invocation.getRawArguments()[position] != null
@@ -152,6 +179,11 @@ public class InvocationMatcher implements DescribedInvocation, CapturesArgumensF
                 && invocation.getMethod().isVarArgs();
     }
 
+    /**
+     * 创建InvocationMatcher列表
+     * @param invocations
+     * @return
+     */
     public static List<InvocationMatcher> createFrom(List<Invocation> invocations) {
         LinkedList<InvocationMatcher> out = new LinkedList<InvocationMatcher>();
 

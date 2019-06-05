@@ -9,7 +9,8 @@ import org.mockito.internal.creation.util.MockitoMethodProxy;
 import java.io.Serializable;
 
 /**
- * 封装MockitoMethodProxy对象
+ * 静态代理，封装MockitoMethodProxy对象
+ * MockitoMethodProxy使用静态代理的方式修改methodProxy的行为，RealMethod修改MockitoMethodProxy
  */
 public class DefaultRealMethod implements RealMethod, Serializable {
 

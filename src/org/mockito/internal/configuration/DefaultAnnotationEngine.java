@@ -23,12 +23,18 @@ import java.util.Map;
  * <p>
  * The {@link #process(Class, Object)} method implementation <strong>does not</strong> process super classes!
  *
+ *
+ * 默认的注解执行引擎
+ *
  * @see MockitoAnnotations
  */
 @SuppressWarnings("unchecked")
 public class DefaultAnnotationEngine implements AnnotationEngine {
     private final Map<Class<? extends Annotation>, FieldAnnotationProcessor<?>> annotationProcessorMap = new HashMap<Class<? extends Annotation>, FieldAnnotationProcessor<?>>();
 
+    /**
+     * 创建注解@Mock、@MockitoAnnotations.Mock，@Captor的执行引擎
+     */
     public DefaultAnnotationEngine() {
         registerAnnotationProcessor(Mock.class, new MockAnnotationProcessor());
         registerAnnotationProcessor(MockitoAnnotations.Mock.class, new MockitoAnnotationsMockAnnotationProcessor());

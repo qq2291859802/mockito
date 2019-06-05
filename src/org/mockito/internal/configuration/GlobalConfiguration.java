@@ -18,7 +18,7 @@ import java.io.Serializable;
 @SuppressWarnings("deprecation")//suppressed until ReturnValues are removed
 public class GlobalConfiguration implements IMockitoConfiguration, Serializable {
     private static final long serialVersionUID = -2860353062105505938L;
-    
+    // 线程隔离
     private static final ThreadLocal<IMockitoConfiguration> GLOBAL_CONFIGURATION = new ThreadLocal<IMockitoConfiguration>();
 
     //back door for testing
@@ -33,7 +33,12 @@ public class GlobalConfiguration implements IMockitoConfiguration, Serializable 
         }
     }
 
+    /**
+     * 创建配置对象（支持动态指定）
+     * @return
+     */
     private IMockitoConfiguration createConfig() {
+        // 默认的配置对象，可以创建org.mockito.configuration.MockitoConfiguration对象替换默认的配置对象
         IMockitoConfiguration defaultConfiguration = new DefaultMockitoConfiguration();
         IMockitoConfiguration config = new ClassPathLoader().loadConfiguration();
         if (config != null) {

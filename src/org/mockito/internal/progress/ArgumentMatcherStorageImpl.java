@@ -18,15 +18,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * 使用堆栈的方式实现匹配器的添加,获取和重置等
+ */
 @SuppressWarnings("unchecked")
 public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
-
+    // 表示需要两个元素匹配
     public static final int TWO_SUB_MATCHERS = 2;
+    // 表示需要一个元素匹配
     public static final int ONE_SUB_MATCHER = 1;
+    // 保存匹配器
     private final Stack<LocalizedMatcher> matcherStack = new Stack<LocalizedMatcher>();
     
     /* (non-Javadoc)
      * @see org.mockito.internal.progress.ArgumentMatcherStorage#reportMatcher(org.hamcrest.Matcher)
+     */
+
+    /**
+     * 添加匹配器
+     * @param matcher
+     * @return
      */
     public HandyReturnValues reportMatcher(Matcher matcher) {
         matcherStack.push(new LocalizedMatcher(matcher));
@@ -40,7 +51,7 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         if (matcherStack.isEmpty()) {
             return Collections.emptyList();
         }
-        
+        // 深度拷贝
         List<LocalizedMatcher> matchers = new ArrayList<LocalizedMatcher>(matcherStack);
         matcherStack.clear();
         return (List) matchers;
@@ -76,6 +87,11 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         return new HandyReturnValues();
     }
 
+    /**
+     * 添加和校验匹配器
+     * @param additionalMatcherName 需要添加的匹配器个数
+     * @param subMatchersCount 添加之后栈中匹配器个数(用于比较)
+     */
     private void assertStateFor(String additionalMatcherName, int subMatchersCount) {
         assertMatchersFoundFor(additionalMatcherName);
         assertIncorrectUseOfAdditionalMatchers(additionalMatcherName, subMatchersCount);
@@ -95,6 +111,10 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         return result;
     }
 
+    /**
+     * 从matcherStack中查找匹配器
+     * @param additionalMatcherName
+     */
     private void assertMatchersFoundFor(String additionalMatcherName) {
         if (matcherStack.isEmpty()) {
             matcherStack.clear();
@@ -102,6 +122,11 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         }
     }
 
+    /**
+     * 校验匹配器个数
+     * @param additionalMatcherName
+     * @param count
+     */
     private void assertIncorrectUseOfAdditionalMatchers(String additionalMatcherName, int count) {
         if(matcherStack.size() < count) {
             ArrayList<LocalizedMatcher> lastMatchers = new ArrayList<LocalizedMatcher>(matcherStack);
@@ -110,9 +135,6 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mockito.internal.progress.ArgumentMatcherStorage#validateState()
-     */
     public void validateState() {
         if (!matcherStack.isEmpty()) {
             ArrayList lastMatchers = new ArrayList<LocalizedMatcher>(matcherStack);
@@ -121,9 +143,6 @@ public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mockito.internal.progress.ArgumentMatcherStorage#reset()
-     */
     public void reset() {
         matcherStack.clear();
     }

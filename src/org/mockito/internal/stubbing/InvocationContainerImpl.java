@@ -20,15 +20,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Invocation容器
+ */
 @SuppressWarnings("unchecked")
 public class InvocationContainerImpl implements InvocationContainer, Serializable {
 
     private static final long serialVersionUID = -5334301962749537177L;
+    //
     private final LinkedList<StubbedInvocationMatcher> stubbed = new LinkedList<StubbedInvocationMatcher>();
+    // mock进程
     private final MockingProgress mockingProgress;
+    //
     private final List<Answer> answersForStubbing = new ArrayList<Answer>();
+    // Invocation管理
     private final RegisteredInvocations registeredInvocations;
-
+    //
     private InvocationMatcher invocationForStubbing;
 
     public InvocationContainerImpl(MockingProgress mockingProgress, MockCreationSettings mockSettings) {
@@ -58,6 +65,7 @@ public class InvocationContainerImpl implements InvocationContainer, Serializabl
         Invocation invocation = invocationForStubbing.getInvocation();
         mockingProgress.stubbingCompleted(invocation);
         AnswersValidator answersValidator = new AnswersValidator();
+        // 校验结果
         answersValidator.validate(answer, invocation);
 
         synchronized (stubbed) {

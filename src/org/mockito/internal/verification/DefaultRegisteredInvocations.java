@@ -14,7 +14,9 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * 基于LinkedList对象实现Invocation的管理
+ */
 public class DefaultRegisteredInvocations implements RegisteredInvocations, Serializable {
 
     private static final long serialVersionUID = -2674402327380736290L;
@@ -35,6 +37,10 @@ public class DefaultRegisteredInvocations implements RegisteredInvocations, Seri
         }
     }
 
+    /**
+     * 深度拷贝invocation列表
+     * @return
+     */
     public List<Invocation> getAll() {
     	List<Invocation> copiedList;
     	synchronized (invocations) {
@@ -50,7 +56,11 @@ public class DefaultRegisteredInvocations implements RegisteredInvocations, Seri
         }
     }
 
+    /**
+     * 移除toString方法的过滤器
+     */
     private static class RemoveToString implements Filter<Invocation> {
+        // 移除toString方法
         public boolean isOut(Invocation invocation) {
             return new ObjectMethodsGuru().isToString(invocation.getMethod());
         }

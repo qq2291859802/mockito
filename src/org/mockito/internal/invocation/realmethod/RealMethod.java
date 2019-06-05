@@ -5,7 +5,13 @@
 package org.mockito.internal.invocation.realmethod;
 
 public interface RealMethod {
-
+    /**
+     * 方法执行
+     * @param target
+     * @param arguments
+     * @return
+     * @throws Throwable
+     */
     Object invoke(Object target, Object[] arguments) throws Throwable;
 
 }

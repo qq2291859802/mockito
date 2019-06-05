@@ -7,6 +7,9 @@ package org.mockito.internal.creation.cglib;
 import org.mockito.cglib.proxy.MethodProxy;
 import org.mockito.internal.creation.util.MockitoMethodProxy;
 
+/**
+ * 静态代理方式，修改methodProxy对象的默认行为
+ */
 class DelegatingMockitoMethodProxy implements MockitoMethodProxy {
 
     private final MethodProxy methodProxy;

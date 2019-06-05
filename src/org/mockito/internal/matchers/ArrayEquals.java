@@ -66,6 +66,11 @@ public class ArrayEquals extends Equals {
         description.appendText("]");
     }
 
+    /**
+     * 将各种类型的数组对象(比如:int[])转换为object[]
+     * @param array
+     * @return
+     */
     public static Object[] createObjectArray(Object array) {
         if (array instanceof Object[]) {
             return (Object[]) array;

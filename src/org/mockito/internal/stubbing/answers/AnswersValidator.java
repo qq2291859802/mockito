@@ -8,12 +8,21 @@ import org.mockito.exceptions.Reporter;
 import org.mockito.invocation.Invocation;
 import org.mockito.stubbing.Answer;
 
+/**
+ * 结果校验器
+ */
 public class AnswersValidator {
 
     private final Reporter reporter = new Reporter();
-    
+
+    /**
+     * 校验不同的Answer
+     * @param answer
+     * @param invocation
+     */
     public void validate(Answer<?> answer, Invocation invocation) {
         MethodInfo methodInfo = new MethodInfo(invocation);
+
         if (answer instanceof ThrowsException) {
             validateException((ThrowsException) answer, methodInfo);
         }
@@ -36,6 +45,11 @@ public class AnswersValidator {
         }
     }
 
+    /**
+     *
+     * @param returnsArgumentAt
+     * @param invocation
+     */
     private void validateReturnArgIdentity(ReturnsArgumentAt returnsArgumentAt, Invocation invocation) {
         returnsArgumentAt.validateIndexWithinInvocationRange(invocation);
 
@@ -48,24 +62,40 @@ public class AnswersValidator {
 
     }
 
+    /**
+     * 校验是不是具体方法
+     * @param answer
+     * @param methodInfo
+     */
     private void validateMockingConcreteClass(CallsRealMethods answer, MethodInfo methodInfo) {
         if (methodInfo.isAbstract()) {
             reporter.cannotCallAbstractRealMethod();
         }
     }
 
+    /**
+     * 校验方法是不是返回值为void
+     * @param answer
+     * @param methodInfo
+     */
     private void validateDoNothing(DoesNothing answer, MethodInfo methodInfo) {
         if (!methodInfo.isVoid()) {
             reporter.onlyVoidMethodsCanBeSetToDoNothing();
         }
     }
 
+    /**
+     * 校验返回值
+     * @param answer
+     * @param methodInfo
+     */
     private void validateReturnValue(Returns answer, MethodInfo methodInfo) {
         if (methodInfo.isVoid()) {
             reporter.cannotStubVoidMethodWithAReturnValue(methodInfo.getMethodName());
         }
-        
+
         if (answer.returnsNull() && methodInfo.returnsPrimitive()) {
+            // null 或者 基本数据类型
             reporter.wrongTypeOfReturnValue(methodInfo.printMethodReturnType(), "null", methodInfo.getMethodName());
         } 
 
@@ -74,6 +104,11 @@ public class AnswersValidator {
         }
     }
 
+    /**
+     * 校验异常
+     * @param answer
+     * @param methodInfo
+     */
     private void validateException(ThrowsException answer, MethodInfo methodInfo) {
         Throwable throwable = answer.getThrowable();
         if (throwable == null) {

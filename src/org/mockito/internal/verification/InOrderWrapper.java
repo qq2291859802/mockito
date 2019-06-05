@@ -14,9 +14,13 @@ import org.mockito.verification.VerificationMode;
 
 import java.util.List;
 
+/**
+ * 装饰者模式：
+ */
 public class InOrderWrapper implements VerificationMode {
-
+    // 顺序校验模式
     private final VerificationInOrderMode mode;
+    //
     private final InOrderImpl inOrder;
 
     public InOrderWrapper(VerificationInOrderMode mode, InOrderImpl inOrder) {

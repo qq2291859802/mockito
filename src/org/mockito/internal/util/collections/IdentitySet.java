@@ -13,9 +13,15 @@ import java.util.LinkedList;
 public class IdentitySet {
 
     LinkedList list = new LinkedList();
-    
+
+    /**
+     * contains改成内存地址比较
+     * @param o
+     * @return
+     */
     public boolean contains(Object o) {
-        for(Object existing:list) {
+        for (Object existing : list) {
+            // 直接直接比较内存地址
             if (existing == o) {
                 return true;
             }
@@ -24,6 +30,6 @@ public class IdentitySet {
     }
 
     public void add(Object o) {
-        list.add(o);        
+        list.add(o);
     }
 }

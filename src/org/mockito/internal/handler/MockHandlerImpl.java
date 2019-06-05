@@ -23,6 +23,8 @@ import java.util.List;
 
 /**
  * Invocation handler set on mock objects.
+ *
+ * 核心的mock对象处理器
  * 
  * @param <T>
  *            type of mock object to handle

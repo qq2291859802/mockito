@@ -6,5 +6,8 @@ package org.mockito.internal.matchers;
 
 import java.io.Serializable;
 
+/**
+ * 可变参数匹配
+ */
 public interface VarargMatcher extends Serializable {
 }

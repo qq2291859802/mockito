@@ -10,6 +10,8 @@ import org.mockito.internal.exceptions.stacktrace.ConditionalStackTraceFilter;
 import java.io.Serializable;
 
 /**
+ *
+ * 如果没有出现异常正常调用方法，出现异常之后，过滤部分日志
  * Provides stack trace filtering on exception.
  */
 public class CleanTraceRealMethod implements RealMethod, Serializable {
@@ -27,6 +29,7 @@ public class CleanTraceRealMethod implements RealMethod, Serializable {
 
     public Object invoke(Object target, Object[] arguments) throws Throwable {
         try {
+            // 正常调用对象
             return realMethod.invoke(target, arguments);
         } catch (Throwable t) {
             new ConditionalStackTraceFilter().filter(t);

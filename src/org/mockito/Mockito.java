@@ -968,6 +968,9 @@ import org.mockito.junit.*;
  * </code></pre>
  *
  * For more information please see {@link MockSettings#useConstructor()}.
+ *
+ *
+ * 上面是使用说明：参考https://www.javadoc.io/doc/org.mockito/mockito-core/1.10.19
  */
 @SuppressWarnings("unchecked")
 public class Mockito extends Matchers {

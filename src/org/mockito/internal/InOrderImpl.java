@@ -37,6 +37,13 @@ public class InOrderImpl implements InOrder, InOrderContext {
         this.mocksToBeVerifiedInOrder.addAll(mocksToBeVerifiedInOrder);
     }
 
+    /**
+     * 校验mock
+     * @param mock to be verified
+     *
+     * @param <T>
+     * @return
+     */
     public <T> T verify(T mock) {
         return this.verify(mock, VerificationModeFactory.times(1));
     }

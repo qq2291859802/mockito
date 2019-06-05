@@ -15,8 +15,11 @@ import org.mockito.mock.MockCreationSettings;
 public class MockHandlerFactory {
 
     public InternalMockHandler create(MockCreationSettings settings) {
+        // 核心处理器
         InternalMockHandler handler = new MockHandlerImpl(settings);
+        // 处理null和基本数据类型(静态代理)
         InternalMockHandler nullResultGuardian = new NullResultGuardian(handler);
+        // 通知监听者
         InternalMockHandler notifier = new InvocationNotifierHandler(nullResultGuardian, settings);
 
         return notifier;

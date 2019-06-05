@@ -30,6 +30,8 @@ public interface AnnotationEngine {
     Object createMockFor(Annotation annotation, Field field);
 
     /**
+     *
+     * 新api
      * Allows extending the interface to perform action on specific fields on the test class.
      * <p>
      * See the implementation of this method to figure out what is it for.

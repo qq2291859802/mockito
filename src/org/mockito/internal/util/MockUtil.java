@@ -18,16 +18,31 @@ import org.mockito.plugins.MockMaker;
 
 import java.lang.reflect.Modifier;
 
+/**
+ * mock的工具类
+ */
 @SuppressWarnings("unchecked")
 public class MockUtil {
 
     private static final MockMaker mockMaker = Plugins.getMockMaker();
 
+    /**
+     * 是否是支持的类型
+     * @param type
+     * @return
+     */
     public boolean isTypeMockable(Class<?> type) {
       return !type.isPrimitive() && !Modifier.isFinal(type.getModifiers());
     }
 
+    /**
+     * 通过mock的配置创建mock对象
+     * @param settings
+     * @param <T>
+     * @return
+     */
     public <T> T createMock(MockCreationSettings<T> settings) {
+        // 创建mock对象的处理器
         MockHandler mockHandler = new MockHandlerFactory().create(settings);
 
         T mock = mockMaker.createMock(settings, mockHandler);
@@ -40,7 +55,13 @@ public class MockUtil {
         return mock;
     }
 
+    /**
+     * 委托mockmaker重置mock对象
+     * @param mock
+     * @param <T>
+     */
     public <T> void resetMock(T mock) {
+        // 深拷贝InternalMockHandler对象
         InternalMockHandler oldHandler = (InternalMockHandler) getMockHandler(mock);
         MockCreationSettings settings = oldHandler.getMockSettings();
         MockHandler newHandler = new MockHandlerFactory().create(settings);
@@ -48,6 +69,12 @@ public class MockUtil {
         mockMaker.resetMock(mock, newHandler, settings);
     }
 
+    /**
+     * 根据mock对象反推handler
+     * @param mock
+     * @param <T>
+     * @return
+     */
     public <T> InternalMockHandler<T> getMockHandler(T mock) {
         if (mock == null) {
             throw new NotAMockException("Argument should be a mock, but is null!");
@@ -74,10 +101,20 @@ public class MockUtil {
         return mockMaker.getHandler(mock) != null;
     }
 
+    /**
+     * 根据mock对象反推mockName
+     * @param mock
+     * @return
+     */
     public MockName getMockName(Object mock) {
         return getMockHandler(mock).getMockSettings().getMockName();
     }
 
+    /**
+     * 重新定义mock名字
+     * @param mock
+     * @param newName
+     */
     public void maybeRedefineMockName(Object mock, String newName) {
         MockName mockName = getMockName(mock);
         //TODO SF hacky...

@@ -24,6 +24,8 @@ import org.mockito.invocation.InvocationOnMock;
  * //Following prints "called with arguments: [foo]"
  * System.out.println(mock.someMethod("foo"));
  * </code></pre>
+ *
+ * 用于描述mock的返回值(定义各种结果：包括异常)
  * 
  * @param <T> the type to return.
  */

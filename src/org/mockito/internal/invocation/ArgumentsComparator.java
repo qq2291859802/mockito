@@ -11,13 +11,29 @@ import org.mockito.invocation.Invocation;
 
 import java.util.List;
 
+/**
+ * 参数比较器
+ */
 @SuppressWarnings("unchecked")
 public class ArgumentsComparator {
+
+    /**
+     * 判断参数是否匹配（Invocation的参数和invocationMatcher的匹配器是否匹配）
+     * @param invocationMatcher
+     * @param actual
+     * @return
+     */
     public boolean argumentsMatch(InvocationMatcher invocationMatcher, Invocation actual) {
         Object[] actualArgs = actual.getArguments();
         return argumentsMatch(invocationMatcher, actualArgs) || varArgsMatch(invocationMatcher, actual);
     }
 
+    /**
+     * 参数匹配
+     * @param invocationMatcher 比较器
+     * @param actualArgs 实参
+     * @return
+     */
     public boolean argumentsMatch(InvocationMatcher invocationMatcher, Object[] actualArgs) {
         if (actualArgs.length != invocationMatcher.getMatchers().size()) {
             return false;
@@ -30,14 +46,22 @@ public class ArgumentsComparator {
         return true;
     }
 
+    /**
+     * 可变参数匹配
+     * @param invocationMatcher
+     * @param actual
+     * @return
+     */
     //ok, this method is a little bit messy but the vararg business unfortunately is messy...      
     private boolean varArgsMatch(InvocationMatcher invocationMatcher, Invocation actual) {
         if (!actual.getMethod().isVarArgs()) {
+            // 是不是可变参数
             //if the method is not vararg forget about it
             return false;
         }
 
         //we must use raw arguments, not arguments...
+        // 原始参数列表个数(可变参数看做一个)
         Object[] rawArgs = actual.getRawArguments();
         List<Matcher> matchers = invocationMatcher.getMatchers();
 
@@ -52,6 +76,7 @@ public class ArgumentsComparator {
                 Matcher actualMatcher;
                 //this is necessary as the framework often decorates matchers
                 if (m instanceof MatcherDecorator) {
+                    // 如果匹配器被装饰了，获取真实的匹配器对象
                     actualMatcher = ((MatcherDecorator)m).getActualMatcher();
                 } else {
                     actualMatcher = m;

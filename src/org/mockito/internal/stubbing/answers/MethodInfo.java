@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 /**
+ * 方法信息(封装method对象)
  * by Szczepan Faber, created at: 3/31/12
  */
 public class MethodInfo implements AbstractAwareMethod {

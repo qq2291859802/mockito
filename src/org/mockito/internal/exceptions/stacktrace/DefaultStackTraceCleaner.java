@@ -3,6 +3,7 @@ package org.mockito.internal.exceptions.stacktrace;
 import org.mockito.exceptions.stacktrace.StackTraceCleaner;
 
 /**
+ * 默认的堆栈日志清除器
 * by Szczepan Faber, created at: 7/29/12
 */
 public class DefaultStackTraceCleaner implements StackTraceCleaner {

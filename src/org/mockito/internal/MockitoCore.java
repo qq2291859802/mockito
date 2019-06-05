@@ -48,6 +48,13 @@ public class MockitoCore {
         return mockUtil.isTypeMockable(typeToMock);
     }
 
+    /**
+     * 核心是调用mockUtil.createMock方法。附带校验和触发监听器的功能
+     * @param typeToMock
+     * @param settings
+     * @param <T>
+     * @return
+     */
     public <T> T mock(Class<T> typeToMock, MockSettings settings) {
         if (!MockSettingsImpl.class.isInstance(settings)) {
             throw new IllegalArgumentException(
@@ -79,8 +86,16 @@ public class MockitoCore {
         mockingProgress.stubbingStarted();
         return (OngoingStubbing) stub();
     }
-    
+
+    /**
+     * 校验mock对象
+     * @param mock
+     * @param mode
+     * @param <T>
+     * @return
+     */
     public <T> T verify(T mock, VerificationMode mode) {
+        // 参数校验
         if (mock == null) {
             reporter.nullPassedToVerify();
         } else if (!mockUtil.isMock(mock)) {
@@ -89,12 +104,17 @@ public class MockitoCore {
         mockingProgress.verificationStarted(new MockAwareVerificationMode(mock, mode));
         return mock;
     }
-    
+
+    /**
+     * 重置多个mock对象
+     * @param mocks
+     * @param <T>
+     */
     public <T> void reset(T ... mocks) {
         mockingProgress.validateState();
         mockingProgress.reset();
         mockingProgress.resetOngoingStubbing();
-        
+
         for (T m : mocks) {
             mockUtil.resetMock(m);
         }
@@ -122,14 +142,19 @@ public class MockitoCore {
         VerifiableInvocationsFinder finder = new VerifiableInvocationsFinder();
         VerificationDataInOrder data = new VerificationDataInOrderImpl(inOrderContext, finder.find(mocks), null);
         VerificationModeFactory.noMoreInteractions().verifyInOrder(data);
-    }    
-    
+    }
+
+    /**
+     * 校验mock不能为空
+     * @param mocks
+     */
     private void assertMocksNotEmpty(Object[] mocks) {
         if (mocks == null || mocks.length == 0) {
             reporter.mocksHaveToBePassedToVerifyNoMoreInteractions();
         }
     }
-    
+
+
     public InOrder inOrder(Object... mocks) {
         if (mocks == null || mocks.length == 0) {
             reporter.mocksHaveToBePassedWhenCreatingInOrder();

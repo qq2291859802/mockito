@@ -12,15 +12,32 @@ import org.mockito.invocation.Invocation;
 
 import java.util.List;
 
-
+/**
+ * Invocation管理
+ */
 public interface RegisteredInvocations {
 
+    /**
+     * 添加一个Invocation对象
+     * @param invocation
+     */
     void add(Invocation invocation);
 
+    /**
+     * 移除最后一个Invocation对象
+     */
     void removeLast();
 
+    /**
+     * 获取所有的Invocation对象
+     * @return
+     */
     List<Invocation> getAll();
 
+    /**
+     * 是否为空
+     * @return
+     */
     boolean isEmpty();
 
 }
