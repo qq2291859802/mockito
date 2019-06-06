@@ -11,9 +11,14 @@ import org.mockito.invocation.Invocation;
 
 import java.util.*;
 
+/**
+ * 所有Invocation查看器
+ */
 public class AllInvocationsFinder {
     
     /**
+     * 发现所有的mock包含的Invocation对象
+     *
      * gets all invocations from mocks. Invocations are ordered earlier first. 
      * 
      * @param mocks mocks

@@ -12,6 +12,8 @@ import org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls;
 import org.mockito.stubbing.Answer;
 
 /**
+ * mock列举的answer枚举类型列表
+ *
  * Enumeration of pre-configured mock answers
  * <p>
  * You can use it to pass extra parameters to &#064;Mock annotation, see more info here: {@link Mock}

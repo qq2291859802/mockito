@@ -13,11 +13,20 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * debugger打印实现
+ */
 public class MockitoDebuggerImpl implements MockitoDebugger {
-
+    // 查看Invocation
     private final AllInvocationsFinder allInvocationsFinder = new AllInvocationsFinder();
+
     private final UnusedStubsFinder unusedStubsFinder = new UnusedStubsFinder();
 
+    /**
+     * 打印所有的invocation和未使用的stub列表
+     * @param mocks
+     * @return
+     */
     public String printInvocations(Object ... mocks) {
         String out = "";
         List<Invocation> invocations = allInvocationsFinder.find(asList(mocks));

@@ -44,6 +44,9 @@ import java.lang.reflect.Array;
  *  Returns null for everything else
  * </li>
  * </ul>
+ *
+ *
+ * 代理ReturnsEmptyValues增加处理String和数组的默认值
  */
 public class ReturnsMoreEmptyValues implements Answer<Object>, Serializable {
     
@@ -62,7 +65,12 @@ public class ReturnsMoreEmptyValues implements Answer<Object>, Serializable {
         Class<?> returnType = invocation.getMethod().getReturnType();
         return returnValueFor(returnType);
     }
-    
+
+    /**
+     * 处理字符串和数组的默认值
+     * @param type
+     * @return
+     */
     Object returnValueFor(Class<?> type) {
         if (type == String.class) {
             return "";

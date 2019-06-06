@@ -109,6 +109,12 @@ public class MockitoAnnotations {
         annotationEngine.process(testClass.getClass(), testClass);
     }
 
+    /**
+     * 扫描特定注解的字段，设置字段值
+     * @param annotationEngine 注解引擎
+     * @param testClass
+     * @param clazz
+     */
     static void scanDeprecatedWay(AnnotationEngine annotationEngine, Object testClass, Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
 
@@ -117,6 +123,12 @@ public class MockitoAnnotations {
         }
     }
 
+    /**
+     * 字段注入mock对象
+     * @param annotationEngine
+     * @param testClass
+     * @param field
+     */
     @SuppressWarnings("deprecation")
     static void processAnnotationDeprecatedWay(AnnotationEngine annotationEngine, Object testClass, Field field) {
         boolean alreadyAssigned = false;

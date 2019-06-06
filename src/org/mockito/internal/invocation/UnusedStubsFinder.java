@@ -12,10 +12,15 @@ import org.mockito.invocation.Invocation;
 
 import java.util.*;
 
+/**
+ * 未使用的测试桩查看器
+ */
 public class UnusedStubsFinder {
 
     /**
      * Finds all unused stubs for given mocks
+     * 根据mock列表，查看所有的测试桩
+     *
      * 
      * @param mocks
      */

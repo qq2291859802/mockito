@@ -32,6 +32,9 @@ import org.mockito.stubbing.Answer;
  * <p>
  * ReturnsSmartNulls will be probably the default return values strategy in
  * Mockito 2.0
+ *
+ *
+ * 装饰ReturnsMoreEmptyValues对象，增加异常处理
  */
 public class ReturnsSmartNulls implements Answer<Object>, Serializable {
 

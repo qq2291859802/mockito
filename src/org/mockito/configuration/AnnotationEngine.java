@@ -11,6 +11,8 @@ import java.lang.reflect.Field;
 
 /**
  * Configures mock creation logic behind &#064;Mock, &#064;Captor and &#064;Spy annotations
+ * 注解执行引擎
+ *
  * <p>
  * If you are interested then see implementations or source code of {@link MockitoAnnotations#initMocks(Object)}
  */

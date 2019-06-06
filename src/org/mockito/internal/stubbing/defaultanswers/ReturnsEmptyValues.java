@@ -65,6 +65,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {
             Object mock = invocation.getMock();
             MockName name = mockUtil.getMockName(mock);
             if (name.isDefault()) {
+                // 默认的mock名称
                 return "Mock for " + mockUtil.getMockSettings(mock).getTypeToMock().getSimpleName() + ", hashCode: " + mock.hashCode();
             } else {
                 return name.toString();
@@ -79,7 +80,12 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {
         Class<?> returnType = invocation.getMethod().getReturnType();
         return returnValueFor(returnType);
     }
-    
+
+    /**
+     * 根据不同的类型返回不同的默认值
+     * @param type
+     * @return
+     */
     Object returnValueFor(Class<?> type) {
         if (Primitives.isPrimitiveOrWrapper(type)) {
             return Primitives.defaultValueForPrimitiveOrWrapper(type);

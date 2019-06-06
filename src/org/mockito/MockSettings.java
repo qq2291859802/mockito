@@ -131,6 +131,9 @@ public interface MockSettings extends Serializable {
     MockSettings spiedInstance(Object instance);
 
     /**
+     * 设置默认的结果
+     *
+     *
      * Specifies default answers to interactions.
      * It's quite advanced feature and typically you don't need it to write decent tests.
      * However it can be helpful when working with legacy systems.
@@ -224,6 +227,8 @@ public interface MockSettings extends Serializable {
      * </code></pre>
      *
      * See the {@link InvocationListener listener interface} for more details.
+     *
+     *  添加监听者
      *
      * @param listeners The invocation listeners to add. May not be null.
      * @return settings instance so that you can fluently specify other settings

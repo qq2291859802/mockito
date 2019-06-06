@@ -11,6 +11,9 @@ import org.mockito.stubbing.Answer;
 
 import java.io.Serializable;
 
+/**
+ * 代理ReturnsMoreEmptyValues对象，增加返回mock类型对象
+ */
 public class ReturnsMocks implements Answer<Object>, Serializable {
     
     private static final long serialVersionUID = -6755257986994634579L;
