@@ -14,6 +14,9 @@ import org.mockito.invocation.Invocation;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * invocation和对应的matcher绑定
+ */
 @SuppressWarnings("unchecked")
 public class MatchersBinder implements Serializable {
 
@@ -21,8 +24,9 @@ public class MatchersBinder implements Serializable {
 
     public InvocationMatcher bindMatchers(ArgumentMatcherStorage argumentMatcherStorage, Invocation invocation) {
         List<LocalizedMatcher> lastMatchers = argumentMatcherStorage.pullLocalizedMatchers();
+        // 校验
         validateMatchers(invocation, lastMatchers);
-
+        // 绑定invocation
         InvocationMatcher invocationWithMatchers = new InvocationMatcher(invocation, (List<Matcher>)(List) lastMatchers);
         return invocationWithMatchers;
     }

@@ -12,6 +12,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 /**
+ * 通过全局的配置获取结果（可以修改配置改变值）
+ *
  * Globally configured Answer.
  * <p>
  * See javadoc for {@link IMockitoConfiguration}

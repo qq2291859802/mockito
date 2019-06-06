@@ -14,8 +14,16 @@ import org.mockito.internal.verification.api.InOrderContext;
 import org.mockito.invocation.Invocation;
 import org.mockito.invocation.Location;
 
+/**
+ * invocation查看器
+ */
 public class InvocationsFinder {
-
+    /**
+     * 查找需要匹配的invocation列表
+     * @param invocations
+     * @param wanted
+     * @return
+     */
     public List<Invocation> findInvocations(List<Invocation> invocations, InvocationMatcher wanted) {
         return ListUtil.filter(invocations, new RemoveNotMatching(wanted));
     }
@@ -133,7 +141,10 @@ public class InvocationsFinder {
         }
         return unverified;
     }
-    
+
+    /**
+     * 移除不需要的Invocation
+     */
     private static class RemoveNotMatching implements Filter<Invocation> {
         private final InvocationMatcher wanted;
 

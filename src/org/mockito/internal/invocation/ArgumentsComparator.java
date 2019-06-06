@@ -19,6 +19,8 @@ public class ArgumentsComparator {
 
     /**
      * 判断参数是否匹配（Invocation的参数和invocationMatcher的匹配器是否匹配）
+     * 比如： list.add(1) ; verify(list).add(2) ;  此时参数不一致，返回false
+     *
      * @param invocationMatcher
      * @param actual
      * @return

@@ -6,6 +6,8 @@ import org.mockitoutil.TestBase;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
+
 /**
  * Created by zhangxiqiang on 2019/6/5.
  */
@@ -15,8 +17,8 @@ public class SimpleAnnotationTest extends TestBase {
 
     @Test
     public void testMock() throws Exception {
-        int size = list.size();
-        System.out.println(size);
+        list.add(1);
+        verify(list).add(2);
     }
 
 }

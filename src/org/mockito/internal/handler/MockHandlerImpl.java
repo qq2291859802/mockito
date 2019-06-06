@@ -57,7 +57,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
             return null;
         }
         VerificationMode verificationMode = mockingProgress.pullVerificationMode();
-
+        // 绑定invocation和matcher，生成InvocationMatcher对象
         InvocationMatcher invocationMatcher = matchersBinder.bindMatchers(
                 mockingProgress.getArgumentMatcherStorage(),
                 invocation
@@ -71,6 +71,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)
             if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {
                 VerificationDataImpl data = createVerificationData(invocationContainerImpl, invocationMatcher);
+                // 校验数据
                 verificationMode.verify(data);
                 return null;
             } else {
@@ -80,7 +81,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
             }
         }
 
-        // prepare invocation for stubbing
+        // prepare invocation for stubbing 设置测试桩
         invocationContainerImpl.setInvocationForPotentialStubbing(invocationMatcher);
         OngoingStubbingImpl<T> ongoingStubbing = new OngoingStubbingImpl<T>(invocationContainerImpl);
         mockingProgress.reportOngoingStubbing(ongoingStubbing);
@@ -92,6 +93,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
             stubbedInvocation.captureArgumentsFrom(invocation);
             return stubbedInvocation.answer(invocation);
         } else {
+            // 根据配置获取该调用器的结果：（默认的结果对象是org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues，默认返回方法返回值类型的默认值）
              Object ret = mockSettings.getDefaultAnswer().answer(invocation);
 
             // redo setting invocation for potential stubbing in case of partial

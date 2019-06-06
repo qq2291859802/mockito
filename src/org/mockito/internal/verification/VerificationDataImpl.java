@@ -13,6 +13,9 @@ import org.mockito.invocation.Invocation;
 
 import java.util.List;
 
+/**
+ * 校验器数据实现类
+ */
 public class VerificationDataImpl implements VerificationData {
 
     private final InvocationMatcher wanted;
@@ -32,6 +35,9 @@ public class VerificationDataImpl implements VerificationData {
         return wanted;
     }
 
+    /**
+     * 不必校验toString方法
+     */
     private void assertWantedIsVerifiable() {
         if (wanted == null) {
             return;
