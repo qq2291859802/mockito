@@ -27,6 +27,11 @@ public class MatchersBinder implements Serializable {
         return invocationWithMatchers;
     }
 
+    /**
+     * 校验匹配器个数和参数个数是否一致
+     * @param invocation
+     * @param lastMatchers
+     */
     private void validateMatchers(Invocation invocation, List<LocalizedMatcher> lastMatchers) {
         if (!lastMatchers.isEmpty()) {
             int recordedMatchersSize = lastMatchers.size();
