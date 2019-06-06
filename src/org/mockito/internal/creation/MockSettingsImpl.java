@@ -83,6 +83,11 @@ public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSett
         return this;
     }
 
+    /**
+     * 设置默认结果
+     * @param defaultAnswer default answer to be used by mock when not stubbed
+     * @return
+     */
     public MockSettings defaultAnswer(Answer defaultAnswer) {
         this.defaultAnswer = defaultAnswer;
         if (defaultAnswer == null) {
@@ -129,6 +134,14 @@ public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSett
         return this;
     }
 
+    /**
+     *
+     * 添加调用器监听器列表
+     *
+     *
+     * @param listeners The invocation listeners to add. May not be null.
+     * @return
+     */
     public MockSettings invocationListeners(InvocationListener... listeners) {
         if (listeners == null || listeners.length == 0) {
             new Reporter().invocationListenersRequiresAtLeastOneListener();
@@ -142,6 +155,12 @@ public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSett
         return this;
     }
 
+    /**
+     * 判断监听器对象列表中是否含有某个监听器
+     *
+     * @param clazz
+     * @return 如果包含返回true
+     */
     private boolean invocationListenersContainsType(Class<?> clazz) {
         for (InvocationListener listener : invocationListeners) {
             if (listener.getClass().equals(clazz)) {
@@ -155,6 +174,10 @@ public class MockSettingsImpl<T> extends CreationSettings<T> implements MockSett
         return this.invocationListeners;
     }
 
+    /**
+     * 是否存在调用器监听器
+     * @return
+     */
     public boolean hasInvocationListeners() {
         return !invocationListeners.isEmpty();
     }

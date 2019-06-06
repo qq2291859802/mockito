@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * mock创建配置具体实现类
+ *
  * by Szczepan Faber, created at: 4/9/12
  */
 public class CreationSettings<T> implements MockCreationSettings<T>, Serializable {
@@ -31,9 +33,11 @@ public class CreationSettings<T> implements MockCreationSettings<T>, Serializabl
     protected Object spiedInstance;
     // 默认结果
     protected Answer<Object> defaultAnswer;
-    //
+    // mock名字
     protected MockName mockName;
+    // 序列化模式
     protected SerializableMode serializableMode = SerializableMode.NONE;
+    // 调用器列表
     protected List<InvocationListener> invocationListeners = new ArrayList<InvocationListener>();
     protected boolean stubOnly;
     // 是否使用构造器

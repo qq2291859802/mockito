@@ -7,6 +7,9 @@ package org.mockito.listeners;
 import org.mockito.MockSettings;
 
 /**
+ * 调用器监听器接口
+ *
+ *
  * This listener can be notified of method invocations on a mock.
  * 
  * For this to happen, it must be registered using {@link MockSettings#invocationListeners(InvocationListener...)}.

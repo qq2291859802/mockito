@@ -10,6 +10,8 @@ import org.mockito.invocation.DescribedInvocation;
 /**
  * Represent a method call on a mock.
  *
+ * invocation的报告信息（包含常见的调用器信息）
+ *
  * <p>
  *     Contains the information on the mock, the location of the stub
  *     the return value if it returned something (maybe null), or an

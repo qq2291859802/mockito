@@ -10,6 +10,10 @@ import org.mockito.invocation.Location;
 
 @Deprecated
 /**
+ *
+ * 使用DescribedInvocation替换
+ *
+ *
  * @Deprecated. We needed to move this class to a better place to keep consistency of the API.
  * Please use {@link DescribedInvocation} instead.
  */

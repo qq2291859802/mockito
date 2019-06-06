@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 创建mock对象的相关配置接口
+ *
  * Informs about the mock settings. An immutable view of {@link org.mockito.MockSettings}.
  */
 public interface MockCreationSettings<T> {

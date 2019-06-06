@@ -13,6 +13,8 @@ import java.io.PrintStream;
 
 /**
  * Logs all invocations to standard output.
+ *
+ * mock invocation 日志对象(使用标准输出)
  * 
  * Used for debugging interactions with a mock. 
  */
@@ -31,6 +33,11 @@ public class VerboseMockInvocationLogger implements InvocationListener {
         this.printStream = printStream;
     }
 
+    /**
+     * 打印调用器信息
+     * @param methodInvocationReport Information about the method call that just happened.
+     *
+     */
     public void reportInvocation(MethodInvocationReport methodInvocationReport) {
         printHeader();
         printStubInfo(methodInvocationReport);
