@@ -38,6 +38,7 @@ public class HandyReturnValues {
     public <T> T returnFor(Class<T> clazz) {
         // explicitly return null if type is not a primitive or a wrapper
         if (isPrimitiveOrWrapper(clazz)) {
+            // 处理基本数据类型和其包装类型
             return defaultValueForPrimitiveOrWrapper(clazz);
         } 
         return null;

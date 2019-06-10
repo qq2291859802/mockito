@@ -65,6 +65,13 @@ public interface OngoingStubbing<T> extends IOngoingStubbing {
      * @param values next return values
      *
      * @return iOngoingStubbing object that allows stubbing consecutive calls
+     *
+     *
+     * 调用多次调用某一个方法，一次返回value + values ;
+     * 例如：
+     *   when(list.size()).thenReturn(1,2,3,4);
+     *  即：
+     *   连续调用list.size()之后依此返回1,2,3,4
      */
     OngoingStubbing<T> thenReturn(T value, T... values);
 

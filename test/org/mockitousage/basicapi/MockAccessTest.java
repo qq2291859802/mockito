@@ -30,5 +30,11 @@ public class MockAccessTest {
 
         assertEquals(false, returnedMock.isEmpty());
         assertEquals(true, returnedMock.isEmpty());
+        assertEquals(true, returnedMock.isEmpty());
+        assertEquals(true, returnedMock.isEmpty());
+        assertEquals(true, returnedMock.isEmpty());
+        assertEquals(true, returnedMock.isEmpty());
+        assertEquals(true, returnedMock.isEmpty());
+
     }
 }

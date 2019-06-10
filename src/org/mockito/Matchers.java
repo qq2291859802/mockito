@@ -100,6 +100,9 @@ import java.util.Set;
  * Also, <b>sometimes {@link ArgumentCaptor} may be a better fit</b> than custom matcher. 
  * For example, if custom argument matcher is not likely to be reused
  * or you just need it to assert on argument values to complete verification of behavior.
+ *
+ *
+ * 定义各种常见的匹配器
  */
 @SuppressWarnings("unchecked")
 public class Matchers {
