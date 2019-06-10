@@ -15,13 +15,19 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class StubberImpl implements Stubber {
-
+    // 测试桩的设置值列表
     final List<Answer> answers = new LinkedList<Answer>();
     private final Reporter reporter = new Reporter();
 
+    /**
+     * 添加测试桩
+     * @param mock The mock
+     * @param <T>
+     * @return
+     */
     public <T> T when(T mock) {
         MockUtil mockUtil = new MockUtil();
-        
+
         if (mock == null) {
             reporter.nullPassedToWhenMethod();
         } else {
@@ -29,7 +35,7 @@ public class StubberImpl implements Stubber {
                 reporter.notAMockPassedToWhenMethod();
             }
         }
-        
+
         mockUtil.getMockHandler(mock).setAnswersForStubbing(answers);
         return mock;
     }
@@ -54,6 +60,12 @@ public class StubberImpl implements Stubber {
         return this;
     }
 
+    /**
+     * 设置测试值
+     *
+     * @param answer to answer when the stubbed method is called
+     * @return
+     */
     public Stubber doAnswer(Answer answer) {
         answers.add(answer);
         return this;

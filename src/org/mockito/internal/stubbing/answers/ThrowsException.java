@@ -11,6 +11,9 @@ import org.mockito.stubbing.Answer;
 
 import java.io.Serializable;
 
+/**
+ * 异常结果
+ */
 public class ThrowsException implements Answer<Object>, Serializable {
 
     private static final long serialVersionUID = 1128820328555183980L;

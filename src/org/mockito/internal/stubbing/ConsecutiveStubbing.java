@@ -8,7 +8,13 @@ import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.DeprecatedOngoingStubbing;
 import org.mockito.stubbing.OngoingStubbing;
 
+/**
+ * 连续的测试桩（支持一个一个的返回结果）
+ * @param <T>
+ */
 public class ConsecutiveStubbing<T> extends BaseStubbing<T> {
+
+    // 用于保存多个最终的结果(通过方法addConsecutiveAnswer)
     private final InvocationContainerImpl invocationContainerImpl;
 
     public ConsecutiveStubbing(InvocationContainerImpl invocationContainerImpl) {

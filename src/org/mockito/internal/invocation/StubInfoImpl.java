@@ -10,6 +10,9 @@ import org.mockito.invocation.StubInfo;
 
 import java.io.Serializable;
 
+/**
+ * 测试桩信息
+ */
 public class StubInfoImpl implements StubInfo, Serializable {
     private static final long serialVersionUID = 2125827349332068867L;
     private final DescribedInvocation stubbedAt;

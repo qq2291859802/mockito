@@ -31,6 +31,9 @@ import org.mockito.internal.progress.IOngoingStubbing;
  * </code></pre>
  *
  * See examples in javadoc for {@link Mockito#when}
+ *
+ *
+ * 测试桩
  */
 public interface OngoingStubbing<T> extends IOngoingStubbing {
 

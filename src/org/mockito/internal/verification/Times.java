@@ -35,6 +35,7 @@ public class Times implements VerificationInOrderMode, VerificationMode {
             MissingInvocationChecker missingInvocation = new MissingInvocationChecker();
             missingInvocation.check(data.getAllInvocations(), data.getWanted());
         }
+
         NumberOfInvocationsChecker numberOfInvocations = new NumberOfInvocationsChecker();
         numberOfInvocations.check(data.getAllInvocations(), data.getWanted(), wantedCount);
     }

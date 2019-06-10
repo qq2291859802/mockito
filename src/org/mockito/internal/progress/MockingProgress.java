@@ -40,6 +40,9 @@ public interface MockingProgress {
      */
     VerificationMode pullVerificationMode();
 
+    /**
+     * 测试桩开始标记
+     */
     void stubbingStarted();
 
     /**

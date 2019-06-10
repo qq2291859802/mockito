@@ -9,6 +9,9 @@ import java.util.List;
 import org.mockito.internal.verification.api.InOrderContext;
 import org.mockito.invocation.Invocation;
 
+/**
+ * invocation标记
+ */
 public class InvocationMarker {
 
     public void markVerified(List<Invocation> invocations, CapturesArgumensFromInvocation wanted) {
@@ -17,6 +20,11 @@ public class InvocationMarker {
         }
     }
 
+    /**
+     * 标记invocation已经校验了
+     * @param invocation
+     * @param wanted
+     */
 	public void markVerified(Invocation invocation, CapturesArgumensFromInvocation wanted) {
 		invocation.markVerified();
 		wanted.captureArgumentsFrom(invocation);

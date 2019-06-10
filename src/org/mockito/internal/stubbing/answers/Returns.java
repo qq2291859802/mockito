@@ -9,6 +9,9 @@ import java.io.Serializable;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+/**
+ * 封装一个对象
+ */
 public class Returns implements Answer<Object>, Serializable {
 
     private static final long serialVersionUID = -6245608253574215396L;

@@ -15,6 +15,9 @@ import org.mockito.internal.reporting.Discrepancy;
 import org.mockito.invocation.Invocation;
 import org.mockito.invocation.Location;
 
+/**
+ * 校验多个invocation
+ */
 public class NumberOfInvocationsChecker {
     
     private final Reporter reporter;
@@ -36,15 +39,18 @@ public class NumberOfInvocationsChecker {
         int actualCount = actualInvocations.size();
         if (wantedCount > actualCount) {
             Location lastInvocation = finder.getLastLocation(actualInvocations);
+            // 太少
             reporter.tooLittleActualInvocations(new Discrepancy(wantedCount, actualCount), wanted, lastInvocation);
         } else if (wantedCount == 0 && actualCount > 0) {
             Location firstUndesired = actualInvocations.get(wantedCount).getLocation();
+            // 期望没有实际存在
             reporter.neverWantedButInvoked(wanted, firstUndesired); 
         } else if (wantedCount < actualCount) {
+            // 太多
             Location firstUndesired = actualInvocations.get(wantedCount).getLocation();
             reporter.tooManyActualInvocations(wantedCount, actualCount, wanted, firstUndesired);
         }
-        
+        // 标记已经校验完成
         invocationMarker.markVerified(actualInvocations, wanted);
     }
 }

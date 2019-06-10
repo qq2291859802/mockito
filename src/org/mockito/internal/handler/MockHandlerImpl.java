@@ -53,6 +53,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
                     mockingProgress.getArgumentMatcherStorage(),
                     invocation
             );
+            // 设置方法测试桩
             invocationContainerImpl.setMethodForStubbing(invocationMatcher);
             return null;
         }
@@ -90,6 +91,7 @@ class MockHandlerImpl<T> implements InternalMockHandler<T> {
         StubbedInvocationMatcher stubbedInvocation = invocationContainerImpl.findAnswerFor(invocation);
 
         if (stubbedInvocation != null) {
+            // 获取设置的测试值
             stubbedInvocation.captureArgumentsFrom(invocation);
             return stubbedInvocation.answer(invocation);
         } else {

@@ -11,6 +11,10 @@ import org.mockito.internal.stubbing.answers.ThrowsExceptionClass;
 import org.mockito.stubbing.DeprecatedOngoingStubbing;
 import org.mockito.stubbing.OngoingStubbing;
 
+/**
+ * 实现最核心的测试桩
+ * @param <T>
+ */
 public abstract class BaseStubbing<T> implements OngoingStubbing<T>, DeprecatedOngoingStubbing<T> {
 
     //TODO why we need this method? The other thenReturn covers it.

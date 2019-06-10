@@ -34,11 +34,13 @@ public class MissingInvocationChecker {
         if (actualInvocations.isEmpty()) {
             Invocation similar = finder.findSimilarInvocation(invocations, wanted);
             if (similar != null) {
+                // 如果存在相似的invocation（方法一致，但是参数不一致）
                 ArgumentMatchingTool argumentMatchingTool = new ArgumentMatchingTool();
                 Integer[] indexesOfSuspiciousArgs = argumentMatchingTool.getSuspiciouslyNotMatchingArgsIndexes(wanted.getMatchers(), similar.getArguments());
                 SmartPrinter smartPrinter = new SmartPrinter(wanted, similar, indexesOfSuspiciousArgs);
                 reporter.argumentsAreDifferent(smartPrinter.getWanted(), smartPrinter.getActual(), similar.getLocation());
             } else {
+                // 如果没有找到相似的invocation
                 reporter.wantedButNotInvoked(wanted, invocations);
             }
         }

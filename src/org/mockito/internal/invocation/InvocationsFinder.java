@@ -79,7 +79,13 @@ public class InvocationsFinder {
         }
         return null;
     }
-    
+
+    /**
+     * 查找相似的invocation对象，用于比较两个相同方法的差异。比如：实参不一样
+     * @param invocations
+     * @param wanted
+     * @return
+     */
     public Invocation findSimilarInvocation(List<Invocation> invocations, InvocationMatcher wanted) {
         Invocation firstSimilar = null;
         for (Invocation invocation : invocations) {

@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 日志打印配置
+ */
 public class PrintSettings {
 
     public static final int MAX_LINE_LENGTH = 45;
@@ -45,8 +48,15 @@ public class PrintSettings {
         this.withTypeInfo = Arrays.asList(indexesOfMatchers);
     }
 
+    /**
+     * 打印invocation和匹配器信息
+     * @param matchers
+     * @param invocation
+     * @return
+     */
     public String print(List<Matcher> matchers, Invocation invocation) {
         MatchersPrinter matchersPrinter = new MatchersPrinter();
+        // mockName.methodName
         String qualifiedName = new MockUtil().getMockName(invocation.getMock()) + "." + invocation.getMethod().getName();
         String invocationString = qualifiedName + matchersPrinter.getArgumentsLine(matchers, this);
         if (isMultiline() || (!matchers.isEmpty() && invocationString.length() > MAX_LINE_LENGTH)) {

@@ -291,6 +291,12 @@ public class Reporter {
         return join(description.toArray());
     }
 
+    /**
+     * 参数不一致的错误信息拼接
+     * @param wanted
+     * @param actual
+     * @param actualLocation
+     */
     public void argumentsAreDifferent(String wanted, String actual, Location actualLocation) {
         String message = join("Argument(s) are different! Wanted:",
                 wanted,

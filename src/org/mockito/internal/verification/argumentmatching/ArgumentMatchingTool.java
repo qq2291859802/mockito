@@ -11,11 +11,17 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 import org.mockito.internal.matchers.ContainsExtraTypeInformation;
 
+/**
+ * 参数配置器工具类
+ */
 @SuppressWarnings("unchecked")
 public class ArgumentMatchingTool {
 
     /**
      * Suspiciously not matching arguments are those that don't match, the toString() representation is the same but types are different.
+     *
+     *
+     * 返回含有额外的类型信息的匹配器下标数组
      */
     public Integer[] getSuspiciouslyNotMatchingArgsIndexes(List<Matcher> matchers, Object[] arguments) {
         if (matchers.size() != arguments.length) {

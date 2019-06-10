@@ -13,6 +13,9 @@ import org.hamcrest.SelfDescribing;
 import org.hamcrest.StringDescription;
 import org.mockito.internal.reporting.PrintSettings;
 
+/**
+ * 打印匹配器信息
+ */
 @SuppressWarnings("unchecked")
 public class MatchersPrinter {
     
