@@ -6,11 +6,17 @@
 package org.mockito.internal.util.reflection;
 
 /**
+ *
+ *  字段报告信息
+ *
  * Report on field initialization
  */
 public class FieldInitializationReport {
+    // 字段所属实例
     private final Object fieldInstance;
+    // 字段是否已经被初始化
     private final boolean wasInitialized;
+    // 是否已经使用字段的构造器进行初始化
     private final boolean wasInitializedUsingConstructorArgs;
 
     public FieldInitializationReport(Object fieldInstance, boolean wasInitialized, boolean wasInitializedUsingConstructorArgs) {

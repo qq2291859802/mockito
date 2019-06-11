@@ -24,7 +24,7 @@ import java.util.Map;
  * The {@link #process(Class, Object)} method implementation <strong>does not</strong> process super classes!
  *
  *
- * 默认的注解执行引擎
+ * 默认的注解执行引擎，用于处理@Mock和@Captor
  *
  * @see MockitoAnnotations
  */

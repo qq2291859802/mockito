@@ -35,6 +35,9 @@ import static org.mockito.Mockito.withSettings;
  * </p>
  * <p/>
  * <p>This engine will fail, if the field is also annotated with incompatible Mockito annotations.
+ *
+ *
+ * 处理注解@Spy
  */
 @SuppressWarnings({"unchecked"})
 public class SpyAnnotationEngine implements AnnotationEngine {

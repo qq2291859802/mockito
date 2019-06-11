@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ *
+ *
+ * 使用构造器的方式实例化对象
  * Injection strategy based on constructor.
  *
  * <p>
@@ -46,6 +49,13 @@ public class ConstructorInjection extends MockInjectionStrategy {
         this.argResolver = argResolver;
     }
 
+    /**
+     * 根据mock对象列表实例化对应的字段
+     * @param field Field needing injection 需要注入的字段
+     * @param fieldOwner Field owner instance. 字段所属实例
+     * @param mockCandidates Pool of mocks to inject. 准备注入的mock对象列表
+     * @return 字段是否使用构造器参数实例化对象
+     */
     public boolean processInjection(Field field, Object fieldOwner, Set<Object> mockCandidates) {
         try {
             SimpleArgumentResolver simpleArgumentResolver = new SimpleArgumentResolver(mockCandidates);
@@ -67,12 +77,18 @@ public class ConstructorInjection extends MockInjectionStrategy {
      * Returns mocks that match the argument type, if not possible assigns null.
      */
     static class SimpleArgumentResolver implements ConstructorArgumentResolver {
+        // 准备匹配构造器参数类型的实例对象列表
         final Set<Object> objects;
 
         public SimpleArgumentResolver(Set<Object> objects) {
             this.objects = objects;
         }
 
+        /**
+         *
+         * @param argTypes Constructor argument types, should not be null. 构造器的参数类型列表
+         * @return
+         */
         public Object[] resolveTypeInstances(Class<?>... argTypes) {
             List<Object> argumentInstances = new ArrayList<Object>(argTypes.length);
             for (Class<?> argType : argTypes) {
@@ -81,6 +97,11 @@ public class ConstructorInjection extends MockInjectionStrategy {
             return argumentInstances.toArray();
         }
 
+        /**
+         * 如果对象object其类型和argType类型匹配，就返回object;否则返回null
+         * @param argType
+         * @return
+         */
         private Object objectThatIsAssignableFrom(Class<?> argType) {
             for (Object object : objects) {
                 if(argType.isAssignableFrom(object.getClass())) return object;

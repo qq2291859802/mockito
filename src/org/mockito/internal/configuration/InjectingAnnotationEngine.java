@@ -21,7 +21,9 @@ import static org.mockito.internal.util.collections.Sets.newMockSafeHashSet;
  */
 @SuppressWarnings({"deprecation", "unchecked"})
 public class InjectingAnnotationEngine implements AnnotationEngine {
+    // 处理@Mock和@Captor
     private final AnnotationEngine delegate = new DefaultAnnotationEngine();
+    // 处理@Spy
     private final AnnotationEngine spyAnnotationEngine = new SpyAnnotationEngine();
 
     /***
@@ -52,6 +54,7 @@ public class InjectingAnnotationEngine implements AnnotationEngine {
      * @see org.mockito.configuration.AnnotationEngine#process(Class, Object)
      */
     public void process(Class<?> clazz, Object testInstance) {
+        // 先处理@Mock，@Spy,@Captor注解
         processIndependentAnnotations(testInstance.getClass(), testInstance);
         processInjectMocks(testInstance.getClass(), testInstance);
     }
@@ -78,6 +81,8 @@ public class InjectingAnnotationEngine implements AnnotationEngine {
 
 
     /**
+     * 处理注解@InjectMock
+     *
      * Initializes mock/spies dependencies for objects annotated with
      * &#064;InjectMocks for given testClassInstance.
      * <p>
@@ -92,7 +97,9 @@ public class InjectingAnnotationEngine implements AnnotationEngine {
         Set<Object> mocks = newMockSafeHashSet();
         
         while (clazz != Object.class) {
+            // 添加有@InjectMocks注解的字段列表
             new InjectMocksScanner(clazz).addTo(mockDependentFields);
+            // 往mocks中添加mock对象
             new MockScanner(testClassInstance, clazz).addPreparedMocks(mocks);
             clazz = clazz.getSuperclass();
         }

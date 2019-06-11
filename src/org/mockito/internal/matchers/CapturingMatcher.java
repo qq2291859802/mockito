@@ -16,6 +16,7 @@ import java.util.List;
 public class CapturingMatcher<T> extends ArgumentMatcher<T> implements CapturesArguments, VarargMatcher, Serializable {
     
     private static final long serialVersionUID = 4274067078639307295L;
+    // 参数列表
     private final LinkedList<Object> arguments = new LinkedList<Object>();
 
     /* (non-Javadoc)

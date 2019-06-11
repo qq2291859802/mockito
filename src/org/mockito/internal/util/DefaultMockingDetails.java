@@ -10,6 +10,8 @@ import org.mockito.invocation.Invocation;
 import java.util.Collection;
 
 /**
+ * mock详情的实现类
+ *
  * Class to inspect any object, and identify whether a particular object is either a mock or a spy.  This is
  * a wrapper for {@link org.mockito.internal.util.MockUtil}.
  */

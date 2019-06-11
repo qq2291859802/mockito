@@ -17,12 +17,16 @@ import static org.mockito.internal.util.collections.Sets.newMockSafeHashSet;
 
 /**
  * Scan mocks, and prepare them if needed.
+ *
+ *
+ *
+ * mock/spy的扫描器
  */
 public class MockScanner {
     private final MockUtil mockUtil = new MockUtil();
-    // 准备mock的对象
+    // 扫描对象实例
     private final Object instance;
-    // 
+    // 扫描class对象
     private final Class<?> clazz;
 
     /**
@@ -52,6 +56,8 @@ public class MockScanner {
     /**
      * Scan and prepare mocks for the given <code>testClassInstance</code> and <code>clazz</code> in the type hierarchy.
      *
+     * 扫描所有的spy和mock字段值
+     *
      * @return A prepared set of mock
      */
     private Set<Object> scan() {
@@ -68,16 +74,29 @@ public class MockScanner {
         return mocks;
     }
 
+    /**
+     * 返回spy和mock字段值
+     * @param instance 字段值
+     * @param field 字段对象
+     * @return
+     */
     private Object preparedMock(Object instance, Field field) {
+
         if (isAnnotatedByMockOrSpy(field)) {
             return instance;
         } else if (isMockOrSpy(instance)) {
+            // 如果没有@Spy,@Mock和@MockitoAnnotations.Mock注解，但是属于spy和mock的实例
             mockUtil.maybeRedefineMockName(instance, field.getName());
             return instance;
         }
         return null;
     }
 
+    /**
+     * 判断是否含有@Spy,@Mock和@MockitoAnnotations.Mock注解
+     * @param field
+     * @return
+     */
     private boolean isAnnotatedByMockOrSpy(Field field) {
         return null != field.getAnnotation(Spy.class)
                 || null != field.getAnnotation(Mock.class)

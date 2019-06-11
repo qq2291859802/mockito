@@ -16,9 +16,12 @@ import java.util.Set;
 
 /**
  * Scan field for injection.
+ *
+ * 注解@InjectMock扫描器
  */
 @SuppressWarnings("deprecation")
 public class InjectMocksScanner {
+    // 扫描类
     private final Class<?> clazz;
 
     /**
@@ -41,6 +44,8 @@ public class InjectMocksScanner {
     }
 
     /**
+     * 扫描含有@InjectMocks注解的字段，返回字段列表
+     *
      * Scan fields annotated by &#064;InjectMocks
      *
      * @return Fields that depends on Mock

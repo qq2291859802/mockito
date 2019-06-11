@@ -9,6 +9,8 @@ import org.mockito.invocation.Invocation;
 import java.util.Collection;
 
 /**
+ * mock的详情
+ *
  * Provides mocking information.
  * For example, you can identify whether a particular object is either a mock or a spy.
  *

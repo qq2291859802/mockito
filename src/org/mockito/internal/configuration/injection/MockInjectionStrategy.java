@@ -41,6 +41,7 @@ public abstract class MockInjectionStrategy {
         if(nextStrategy != null) {
             nextStrategy.thenTry(strategy);
         } else {
+            // 如果是第一次添加nextStrategy就为当前策略
             nextStrategy = strategy;
         }
         return strategy;
