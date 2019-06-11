@@ -57,10 +57,13 @@ import static org.mockito.internal.util.collections.Sets.newMockSafeHashSet;
  * </p>
  */
 public class PropertyAndSetterInjection extends MockInjectionStrategy {
-
+    // mock候选过滤器
     private final MockCandidateFilter mockCandidateFilter = new TypeBasedCandidateFilter(new NameBasedCandidateFilter(new FinalMockCandidateFilter()));
     private final Comparator<Field> superTypesLast = new FieldTypeAndNameComparator();
 
+    /**
+     * 不是final / static修饰的字段
+     */
     private final ListUtil.Filter<Field> notFinalOrStatic = new ListUtil.Filter<Field>() {
         public boolean isOut(Field object) {
             return Modifier.isFinal(object.getModifiers()) || Modifier.isStatic(object.getModifiers());
@@ -83,6 +86,12 @@ public class PropertyAndSetterInjection extends MockInjectionStrategy {
         return injectionOccurred;
     }
 
+    /**
+     * 字段注入mock值
+     * @param field
+     * @param fieldOwner
+     * @return
+     */
     private FieldInitializationReport initializeInjectMocksField(Field field, Object fieldOwner) {
         FieldInitializationReport report = null;
         try {
@@ -97,7 +106,13 @@ public class PropertyAndSetterInjection extends MockInjectionStrategy {
         return report; // never null
     }
 
-
+    /**
+     * 注入字段值
+     * @param awaitingInjectionClazz
+     * @param mocks
+     * @param instance
+     * @return
+     */
     private boolean injectMockCandidates(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object instance) {
         boolean injectionOccurred = false;
         List<Field> orderedInstanceFields = orderedInstanceFieldsFrom(awaitingInjectionClazz);
@@ -111,9 +126,11 @@ public class PropertyAndSetterInjection extends MockInjectionStrategy {
     private boolean injectMockCandidatesOnFields(Set<Object> mocks, Object instance, boolean injectionOccurred, List<Field> orderedInstanceFields) {
         for (Iterator<Field> it = orderedInstanceFields.iterator(); it.hasNext(); ) {
             Field field = it.next();
+            // 注入字段
             Object injected = mockCandidateFilter.filterCandidate(mocks, field, instance).thenInject();
             if (injected != null) {
                 injectionOccurred |= true;
+                // 移除已经注入的
                 mocks.remove(injected);
                 it.remove();
             }
@@ -121,25 +138,35 @@ public class PropertyAndSetterInjection extends MockInjectionStrategy {
         return injectionOccurred;
     }
 
+    /**
+     * 过滤不为final或者static的字段列表
+     * @param awaitingInjectionClazz
+     * @return
+     */
     private List<Field> orderedInstanceFieldsFrom(Class<?> awaitingInjectionClazz) {
         List<Field> declaredFields = Arrays.asList(awaitingInjectionClazz.getDeclaredFields());
         declaredFields = ListUtil.filter(declaredFields, notFinalOrStatic);
-
+        // 排序
         Collections.sort(declaredFields, superTypesLast);
 
         return declaredFields;
     }
 
+    /**
+     * 字段类型和名称比较器
+     */
     static class FieldTypeAndNameComparator implements Comparator<Field> {
         public int compare(Field field1, Field field2) {
             Class<?> field1Type = field1.getType();
             Class<?> field2Type = field2.getType();
 
             // if same type, compares on field name
+            // 类型相同比较名字
             if (field1Type == field2Type) {
                 return field1.getName().compareTo(field2.getName());
             }
             if(field1Type.isAssignableFrom(field2Type)) {
+                // field1Type是field2Type的父类型
                 return 1;
             }
             if(field2Type.isAssignableFrom(field1Type)) {

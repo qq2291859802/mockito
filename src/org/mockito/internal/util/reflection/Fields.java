@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 字段的工具类
+ *
  * Small fluent reflection tools to work with fields.
  *
  * Code is very new and might need rework.

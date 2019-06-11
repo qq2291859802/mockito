@@ -10,14 +10,18 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 
 /**
+ * java bean使用set方法设置字段值
+ *
  * This utility class will call the setter of the property to inject a new value.
  */
 public class BeanPropertySetter {
 
     private static final String SET_PREFIX = "set";
-
+    // 字段所属对象
     private final Object target;
+    // true: 报告没有set方法
     private final boolean reportNoSetterFound;
+    // 字段对象
     private final Field field;
 
     /**
@@ -42,6 +46,10 @@ public class BeanPropertySetter {
     }
 
     /**
+     * 设置字段值，返回true表示设置成功
+     *
+     *
+     *
      * Set the value to the property represented by this {@link BeanPropertySetter}
      * @param value the new value to pass to the property setter
      * @return <code>true</code> if the value has been injected, <code>false</code> otherwise
@@ -75,6 +83,8 @@ public class BeanPropertySetter {
     }
 
     /**
+     *
+     * 拼接set方法
      * Retrieve the setter name from the field name.
      *
      * <p>Implementation is based on the code of {@link java.beans.Introspector}.</p>

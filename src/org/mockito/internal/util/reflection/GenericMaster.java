@@ -8,6 +8,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * 泛型工具类
+ */
 @SuppressWarnings("unchecked")
 public class GenericMaster {
 
@@ -23,6 +26,7 @@ public class GenericMaster {
             if (actual instanceof Class) {
                 return (Class) actual;
             } else if (actual instanceof ParameterizedType) {
+                // 泛型的实际参数
                 //in case of nested generics we don't go deep
                 return (Class) ((ParameterizedType) actual).getRawType();
             }

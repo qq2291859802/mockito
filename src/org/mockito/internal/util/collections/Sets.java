@@ -11,11 +11,23 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 
+/**
+ * set工具类
+ */
 public abstract class Sets {
+    /**
+     * 创建一个hashcode和equals安全的集合
+     * @param mocks
+     * @return
+     */
     public static Set<Object> newMockSafeHashSet(Iterable<Object> mocks) {
         return HashCodeAndEqualsSafeSet.of(mocks);
     }
-
+    /**
+     * 创建一个hashcode和equals安全的集合
+     * @param mocks
+     * @return
+     */
     public static Set<Object> newMockSafeHashSet(Object... mocks) {
         return HashCodeAndEqualsSafeSet.of(mocks);
     }

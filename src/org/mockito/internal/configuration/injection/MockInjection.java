@@ -60,7 +60,9 @@ public class MockInjection {
         private final Set<Object> mocks = newMockSafeHashSet();
         // 需要注入的字段列表所属实例
         private final Object fieldOwner;
+        // 前置注入策略链
         private final MockInjectionStrategy injectionStrategies = MockInjectionStrategy.nop();
+        // 后置注入策略链
         private final MockInjectionStrategy postInjectionStrategies = MockInjectionStrategy.nop();
 
         private OngoingMockInjection(Field field, Object fieldOwner) {
@@ -86,19 +88,31 @@ public class MockInjection {
             return this;
         }
 
+        /**
+         * 尝试使用字段直接注入的方式
+         * @return
+         */
         public OngoingMockInjection tryPropertyOrFieldInjection() {
             injectionStrategies.thenTry(new PropertyAndSetterInjection());
             return this;
         }
 
+        /**
+         * 添加后置策略处理
+         * @return
+         */
         public OngoingMockInjection handleSpyAnnotation() {
             postInjectionStrategies.thenTry(new SpyOnInjectedFieldsHandler());
             return this;
         }
 
+        /**
+         * 注入的核心方法
+         */
         public void apply() {
             for (Field field : fields) {
                 injectionStrategies.process(field, fieldOwner, mocks);
+                // 后执行
                 postInjectionStrategies.process(field, fieldOwner, mocks);
             }
         }

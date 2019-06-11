@@ -18,6 +18,8 @@ import java.util.Set;
 import static org.mockito.Mockito.withSettings;
 
 /**
+ * 处理同时存在@InjectMocks和@Spy
+ *
  * Handler for field annotated with &#64;InjectMocks and &#64;Spy.
  *
  * <p>
@@ -33,6 +35,7 @@ public class SpyOnInjectedFieldsHandler extends MockInjectionStrategy {
 
         // TODO refoctor : code duplicated in SpyAnnotationEngine
         if(!fieldReader.isNull() && field.isAnnotationPresent(Spy.class)) {
+            // 同时存在@Spy
             try {
                 Object instance = fieldReader.read();
                 if (new MockUtil().isMock(instance)) {
@@ -41,6 +44,7 @@ public class SpyOnInjectedFieldsHandler extends MockInjectionStrategy {
                     Mockito.reset(instance);
                 } else {
                     new FieldSetter(fieldOwner, field).set(
+                            // 重新创建mock对象(带有spy特性)
                         Mockito.mock(instance.getClass(), withSettings()
                             .spiedInstance(instance)
                             .defaultAnswer(Mockito.CALLS_REAL_METHODS)

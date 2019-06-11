@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * IO的工具类
+ *
  * IO utils. A bit of reinventing the wheel but we don't want extra dependencies at this stage and we want to be java.
  */
 public class IOUtil {
@@ -42,6 +44,8 @@ public class IOUtil {
     }
 
     /**
+     * 安全关闭
+     *
      * Closes the target. Does nothing when target is null. Is silent.
      *
      * @param closeable the target, may be null

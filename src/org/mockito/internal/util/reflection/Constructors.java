@@ -2,6 +2,9 @@ package org.mockito.internal.util.reflection;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * 构造器工具类
+ */
 public abstract class Constructors {
 
     /**

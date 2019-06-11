@@ -24,11 +24,12 @@ public abstract class MockInjectionStrategy {
         };
     }
 
-
     private MockInjectionStrategy nextStrategy;
 
     /**
      * Enqueue next injection strategy.
+     *
+     * 使用链表的方式将所有的注入策略连接起来
      *
      * <p>
      * The implementation should take care of the actual calling if required.
@@ -48,6 +49,9 @@ public abstract class MockInjectionStrategy {
     }
 
     /**
+     *
+     * 执行所有设置的注入策略链
+     *
      * Actually inject mockCandidates on field.
      *
      * <p>
@@ -69,11 +73,15 @@ public abstract class MockInjectionStrategy {
         if(processInjection(onField, fieldOwnedBy, mockCandidates)) {
             return true;
         }
+        // 执行所有的策略
         return relayProcessToNextStrategy(onField, fieldOwnedBy, mockCandidates);
     }
 
     /**
      * Process actual injection.
+     *
+     *
+     * 注入的核心方法（等待实现）
      *
      * <p>
      * Don't call this method directly, instead call {@link #process(Field, Object, Set)}
@@ -86,6 +94,13 @@ public abstract class MockInjectionStrategy {
      */
     protected abstract boolean processInjection(Field field, Object fieldOwner, Set<Object> mockCandidates);
 
+    /**
+     * 执行策略链
+     * @param field
+     * @param fieldOwner
+     * @param mockCandidates
+     * @return
+     */
     private boolean relayProcessToNextStrategy(Field field, Object fieldOwner, Set<Object> mockCandidates) {
         return nextStrategy != null && nextStrategy.process(field, fieldOwner, mockCandidates);
     }

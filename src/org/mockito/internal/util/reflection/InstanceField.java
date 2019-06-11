@@ -10,13 +10,18 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**
+ *
+ * 字段实例
  * Represents an accessible instance field.
  *
  * Contains the instance reference on which the field can be read adn write.
  */
 public class InstanceField {
+    // 字段对象
     private final Field field;
+    // 字段所属实例
     private final Object instance;
+    // 字段值获取工具
     private FieldReader fieldReader;
 
     /**
@@ -61,6 +66,9 @@ public class InstanceField {
     }
 
     /**
+     *
+     * 字段注解是否存在
+     *
      * Check if the field is annotated by the given annotation.
      *
      * @param annotationClass The annotation type to check.

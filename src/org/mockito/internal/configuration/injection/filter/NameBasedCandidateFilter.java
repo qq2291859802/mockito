@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 基于mock名称过滤
+ */
 public class NameBasedCandidateFilter implements MockCandidateFilter {
     private final MockCandidateFilter next;
     private final MockUtil mockUtil = new MockUtil();
@@ -23,6 +26,7 @@ public class NameBasedCandidateFilter implements MockCandidateFilter {
         List<Object> mockNameMatches = new ArrayList<Object>();
         if(mocks.size() > 1) {
             for (Object mock : mocks) {
+                // 查找字段名和mock名相同的mock对象
                 if (field.getName().equals(mockUtil.getMockName(mock).toString())) {
                     mockNameMatches.add(mock);
                 }

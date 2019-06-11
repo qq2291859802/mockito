@@ -17,6 +17,8 @@ import java.util.Set;
 import static org.mockito.internal.util.collections.Sets.newMockSafeHashSet;
 
 /**
+ * 处理所有的mock注解(@Mock,@Captor,@Spy,@InjectMocks等)
+ *
  * See {@link MockitoAnnotations}
  */
 @SuppressWarnings({"deprecation", "unchecked"})

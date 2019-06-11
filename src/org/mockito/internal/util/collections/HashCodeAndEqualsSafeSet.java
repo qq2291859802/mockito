@@ -15,6 +15,9 @@ import java.util.Set;
 import static java.lang.reflect.Array.*;
 
 /**
+ *
+ *  hashcode和equals方法安全的set集合,封装了HashCodeAndEqualsMockWrapper集合
+ *
  * hashCode and equals safe hash based set.
  *
  * <p>
@@ -95,6 +98,12 @@ public class HashCodeAndEqualsSafeSet implements Set<Object> {
         return unwrapTo(new Object[size()]);
     }
 
+    /**
+     * iterator -> T[]
+     * @param array
+     * @param <T>
+     * @return
+     */
     private <T> T[] unwrapTo(T[] array) {
         Iterator<Object> iterator = iterator();
         for (int i = 0, objectsLength = array.length; i < objectsLength; i++) {

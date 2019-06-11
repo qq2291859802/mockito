@@ -7,6 +7,8 @@ package org.mockito.internal.util.collections;
 import org.mockito.internal.util.MockUtil;
 
 /**
+ * 如果equals和hashcode不能在内部进行stub，它们可能会抛出NPE。
+ *
  * hashCode and equals safe mock wrapper.
  *
  * <p>

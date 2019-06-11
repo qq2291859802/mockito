@@ -6,9 +6,13 @@ package org.mockito.internal.util.reflection;
 
 import java.lang.reflect.Field;
 
+/**
+ * 使用字段的方式设置字段值
+ */
 public class FieldSetter {
-
+    // 字段所属对象
     private final Object target;
+    // 字段对象
     private final Field field;
 
     public FieldSetter(Object target, Field field) {
@@ -16,6 +20,10 @@ public class FieldSetter {
         this.field = field;
     }
 
+    /**
+     * 设置字段值
+     * @param value
+     */
     public void set(Object value) {
         AccessibilityChanger changer = new AccessibilityChanger();
         changer.enableAccess(field);

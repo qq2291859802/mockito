@@ -5,6 +5,8 @@
 package org.mockito.internal.configuration.injection.filter;
 
 /**
+ * 
+ *
  * Allow the ongoing injection of a mock candidate.
  */
 public interface OngoingInjecter {

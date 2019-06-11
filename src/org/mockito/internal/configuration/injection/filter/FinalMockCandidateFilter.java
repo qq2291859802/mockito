@@ -20,13 +20,23 @@ import java.util.Collection;
  * </ul>
  */
 public class FinalMockCandidateFilter implements MockCandidateFilter {
+
+    /**
+     * mock列表
+     * @param mocks
+     * @param field
+     * @param fieldInstance
+     * @return
+     */
     public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {
         if(mocks.size() == 1) {
+            // 如果mock候选列表只有一个元素
             final Object matchingMock = mocks.iterator().next();
 
             return new OngoingInjecter() {
                 public Object thenInject() {
                     try {
+                        // 先使用set方法设置字段值，再使用字段直接设置字段值
                         if (!new BeanPropertySetter(fieldInstance, field).set(matchingMock)) {
                             new FieldSetter(fieldInstance, field).set(matchingMock);
                         }

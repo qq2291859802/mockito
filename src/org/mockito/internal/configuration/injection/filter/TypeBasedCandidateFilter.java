@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 基于mock类型过滤
+ */
 public class TypeBasedCandidateFilter implements MockCandidateFilter {
 
     MockCandidateFilter next;
